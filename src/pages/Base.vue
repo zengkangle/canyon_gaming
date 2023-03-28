@@ -9,7 +9,7 @@
 
 <script>
 import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+
 
 export default {
   name: "Base",
@@ -27,7 +27,6 @@ export default {
   },
   components: {
     Header,
-    Sidebar,
   },
 };
 </script>

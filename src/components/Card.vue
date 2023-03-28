@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="card">
-      <t-image :src="item.imgsrc" fit="cover"></t-image>
+      <el-image :src="item.imgsrc" fit="cover"></el-image>
       <div class="title">{{ item.title }}</div>
       <div class="footer">
-        <t-avatar
-          image="https://tdesign.gtimg.com/site/avatar.jpg"
-          size="small"
-        />
+        <el-avatar
+          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          :size="25"
+        ></el-avatar>
         <div class="nick">{{ item.nick }}</div>
         <div class="im">
           <img src="../assets/hot.png" alt="" width="14px" />
@@ -29,7 +29,6 @@ export default {
 <style scoped>
 .card {
   width: 331px;
-  /* width: 100%; */
   border: 1px solid white;
   border-radius: 3%;
   overflow: hidden;
@@ -47,6 +46,7 @@ export default {
   margin: 0 20px 0 5px;
   width: 170px;
   font-size: 12px;
+  line-height: 25px;
 }
 .im {
   position: relative;
@@ -55,5 +55,6 @@ export default {
 .hot-num {
   margin-left: 5px;
   font-size: 12px;
+  line-height: 25px;
 }
 </style>
