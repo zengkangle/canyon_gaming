@@ -1,63 +1,52 @@
 <template>
   <div>
-    <t-swiper :interval="3000" :height="236" :autoplay="true" type="card">
-      <t-swiper-item>
-        <t-image
-          src="https://huyaimg.msstatic.com/cdnimage/gamebanner/php95L0oj1574673243.png"
-          fit="fill"
-        />
-      </t-swiper-item>
-      <t-swiper-item>
-        <t-image
-          src="https://huyaimg.msstatic.com/cdnimage/gamebanner/phpwvTwYB1679278770.jpg?spformat=png,webp"
-          fit="fill"
-        />
-      </t-swiper-item>
-      <t-swiper-item>
-        <t-image
-          src="https://huyaimg.msstatic.com/cdnimage/gamebanner/phprtumwH1674380529.jpg?spformat=png,webp"
-          fit="fill"
-        />
-      </t-swiper-item>
-      <t-swiper-item>
-        <t-image
-          src="https://huyaimg.msstatic.com/cdnimage/gamebanner/php2OOdHi1657091582.jpg"
-          fit="fill"
-        />
-      </t-swiper-item>
-      <t-swiper-item>
-        <t-image
-          src="https://huyaimg.msstatic.com/cdnimage/gamebanner/phpHzNP6j1583330685.jpg"
-          fit="fill"
-        />
-      </t-swiper-item>
-      <t-swiper-item>
-        <t-image
-          src="https://huyaimg.msstatic.com/cdnimage/gamebanner/phphH7b6f1679900374.jpg?spformat=png,webp"
-          fit="fill"
-        />
-      </t-swiper-item>
-    </t-swiper>
-    <!-- <div :style="{ width: '500px' }">
-          <t-swiper :duration="300" :interval="2000"
-  type="card">
-            <t-swiper-item>
-              <div :style="{ height: '200px', background: 'var(--td-success-color-7)' }" />
-            </t-swiper-item>
-            <t-swiper-item>
-              <div :style="{ height: '200px', background: 'var(--td-warning-color-7)' }" />
-            </t-swiper-item>
-            <t-swiper-item>
-              <div :style="{ height: '200px', background: 'var(--td-error-color-7)' }" />
-            </t-swiper-item>
-          </t-swiper>
-        </div> -->
+    <el-carousel trigger="click" height="236px" :interval="3000" type="card">
+      <el-carousel-item v-for="item in imgs" :key="item.id">
+        <el-image :src="item.imgurl" alt=""></el-image>
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
 <script>
 export default {
   name: "Swiper",
+  data() {
+    return {
+      imgs: [
+        {
+          id: 0,
+          imgurl:
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/php95L0oj1574673243.png",
+        },
+        {
+          id: 1,
+          imgurl:
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phpwvTwYB1679278770.jpg?spformat=png,webp",
+        },
+        {
+          id: 2,
+          imgurl:
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phprtumwH1674380529.jpg?spformat=png,webp",
+        },
+        {
+          id: 3,
+          imgurl:
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/php2OOdHi1657091582.jpg",
+        },
+        {
+          id: 4,
+          imgurl:
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phpHzNP6j1583330685.jpg",
+        },
+        {
+          id: 5,
+          imgurl:
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phphH7b6f1679900374.jpg?spformat=png,webp",
+        },
+      ],
+    };
+  },
 };
 </script>
 

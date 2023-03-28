@@ -10,13 +10,21 @@ import router from './router'
 import store from './store'
 
 //引入TDesign组件
-import TDesign from 'tdesign-vue'
+// import TDesign from 'tdesign-vue'
 // 引入组件库全局样式资源
-import 'tdesign-vue/es/style/index.css'
+// import 'tdesign-vue/es/style/index.css'
+//按需引入ElementUI组件
+import { Carousel, CarouselItem, Image } from 'element-ui'
 
 //应用插件
 Vue.use(VueRouter)
-Vue.use(TDesign)
+// Vue.use(TDesign)
+
+//全局组件
+Vue.component('el-carousel', Carousel);
+Vue.component('el-carousel-item', CarouselItem);
+Vue.component('el-image', Image);
+
 
 //关闭生产提醒
 Vue.config.productionTip = false
