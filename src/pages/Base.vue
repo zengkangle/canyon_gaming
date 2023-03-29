@@ -4,12 +4,13 @@
     <div class="content">
       <router-view class="view"></router-view>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "../components/Header";
-
+import Footer from "../components/Footer";
 
 export default {
   name: "Base",
@@ -27,6 +28,7 @@ export default {
   },
   components: {
     Header,
+    Footer,
   },
 };
 </script>
@@ -45,6 +47,8 @@ export default {
   width: 1400px;
   margin: 0 auto;
   padding-top: 80px;
-  /* z-index: -1000; */
+}
+.elb {
+  z-index: 10;
 }
 </style>

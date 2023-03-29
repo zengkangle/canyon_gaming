@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <el-backtop>
+      <i class="el-icon-caret-top"></i>
+    </el-backtop>
   </div>
 </template>
 

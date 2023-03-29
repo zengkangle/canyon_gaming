@@ -16,8 +16,11 @@ import request from './utils/request'
 // import TDesign from 'tdesign-vue'
 // 引入组件库全局样式资源
 // import 'tdesign-vue/es/style/index.css'
+
+//按需引入ElementUI主题
+import theme from './theme/index.css'
 //按需引入ElementUI组件
-import { Carousel, CarouselItem, Image, Message, MessageBox, Avatar } from 'element-ui'
+import { Carousel, CarouselItem, Image, Message, MessageBox, Avatar, Pagination, Input, Button , Backtop,} from 'element-ui'
 
 //应用插件
 Vue.use(VueRouter)
@@ -28,6 +31,10 @@ Vue.component('el-carousel', Carousel);
 Vue.component('el-carousel-item', CarouselItem);
 Vue.component('el-image', Image);
 Vue.component('el-avatar', Avatar);
+Vue.component('el-pagination', Pagination);
+Vue.component('el-input', Input);
+Vue.component('el-button', Button);
+Vue.component('el-backtop', Backtop);
 
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$prompt = MessageBox.prompt;

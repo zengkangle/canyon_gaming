@@ -1,13 +1,15 @@
 <template>
   <div class="home">
     <Swiper />
+    <LiveListHeader/>
     <CardList />
-    <Pageination />
+    <Pageination  class="pi"/>
   </div>
 </template>
 
 <script>
 import Swiper from "../components/Swiper";
+import LiveListHeader from '../components/LiveListHeader'
 import CardList from "../components/CardList";
 import Pageination from "../components/Pageination";
 
@@ -17,6 +19,7 @@ export default {
     Swiper,
     CardList,
     Pageination,
+    LiveListHeader,
   },
 };
 </script>
@@ -26,5 +29,8 @@ export default {
 .home {
   /* position: absolute; */
   background-color: #e5e7eb;
+}
+.pi{
+  padding-bottom: 15px;
 }
 </style>

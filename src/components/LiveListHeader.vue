@@ -1,0 +1,72 @@
+<template>
+  <div class="header">
+    <div class="title">英雄联盟</div>
+    <router-link to="/" class="text" active-class="text_active">
+      全部</router-link
+    >
+    <router-link to="/1" class="text" active-class="text_active">
+      职业</router-link
+    >
+    <router-link to="/1" class="text" active-class="text_active">
+      绝活</router-link
+    >
+    <router-link to="/2" class="text2" active-class="text2_active">
+      云顶之奕</router-link
+    >
+    <router-link to="/2" class="text2" active-class="text2_active">
+      LOL手游</router-link
+    >
+  </div>
+</template>
+
+<script>
+export default {
+  name: "LiveListHeader",
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.header {
+  height: 50px;
+  margin-bottom: 15px;
+  display: flex;
+}
+.title {
+  line-height: 50px;
+  font-size: 26px;
+  margin-left: 8px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.title:hover {
+  color: #c3a340;
+}
+.header > a {
+  border-radius: 2.666667rem 2.666667rem 2.666667rem 2.666667rem;
+  text-align: center;
+  border: 1px solid #dcdfe6;
+  background-color: white;
+  margin: auto 0;
+  height: 28px;
+  line-height: 28px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+.text {
+  color: #606266;
+  width: 55px;
+}
+.text_active,
+.text2_active {
+  color: #c3a340;
+}
+.text2 {
+  color: #606266;
+  width: 80px;
+}
+.butn {
+  height: 28px;
+  margin: auto 0;
+}
+</style>

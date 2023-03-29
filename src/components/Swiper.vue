@@ -22,17 +22,17 @@ export default {
         {
           id: 1,
           imgurl:
-            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phpwvTwYB1679278770.jpg?spformat=png,webp",
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phpw0oXj51674994551.jpg?spformat=png,webp",
         },
         {
           id: 2,
           imgurl:
-            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phprtumwH1674380529.jpg?spformat=png,webp",
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phpEpJeZn1673858103.jpg?spformat=png,webp",
         },
         {
           id: 3,
           imgurl:
-            "https://huyaimg.msstatic.com/cdnimage/gamebanner/php2OOdHi1657091582.jpg",
+            "https://huyaimg.msstatic.com/cdnimage/gamebanner/phpj2yPj41675149665.jpg?spformat=png,webp",
         },
         {
           id: 4,
