@@ -18,7 +18,8 @@ import request from './utils/request'
 // import 'tdesign-vue/es/style/index.css'
 
 //按需引入ElementUI主题
-// import './theme/index.css'
+
+import './theme/index.css'
 //按需引入ElementUI组件
 import { Carousel, CarouselItem, Image, Message, MessageBox, Avatar, Pagination, Input, Button , Backtop,} from 'element-ui'
 

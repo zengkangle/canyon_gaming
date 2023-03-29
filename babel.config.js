@@ -8,7 +8,7 @@ module.exports = {
       "component",
       {
         "libraryName": "element-ui",
-        // "styleLibraryName": "~src/theme"
+        "styleLibraryName": "~src/theme",
         "styleLibraryName": "theme-chalk"
       }
     ]
