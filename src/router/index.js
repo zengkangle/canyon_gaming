@@ -6,6 +6,11 @@ import Base from "../pages/Base"
 import Starter from '../pages/Starter'
 import Home from '../pages/Home'
 
+//用户注册登录路由
+import login from "../components/login"
+import enroll from "../components/enroll"
+
+
 //创建一个路由器
 const router = new VueRouter({
     routes: [
@@ -27,8 +32,23 @@ const router = new VueRouter({
         {
             path: '/Canyon_Gaming_Starter',
             component: Starter,
-            meta: { title: 'Canyon_Gaming_Starter' }
+            meta: { title: 'Canyon_Gaming_Starter' },
+            children:[
+                //登录界面路由
+                {
+                    path:'/',
+                    component:login,
+                },
+                //注册路由
+                {
+                    path:'enroll',
+                    component:enroll
+                }
+
+
+            ]
         },
+        
 
     ]
 })
