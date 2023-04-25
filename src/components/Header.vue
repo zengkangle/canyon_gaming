@@ -6,7 +6,7 @@
         <router-link to="/" active-class="menu_active">首页</router-link>
         <router-link to="/11" active-class="menu_active">视频</router-link>
         <router-link to="/22" active-class="menu_active">赛事</router-link>
-        <router-link to="/33" active-class="menu_active">鱼吧</router-link>
+        <router-link to="/base/fish" active-class="menu_active">鱼吧</router-link>
       </div>
       <div class="right">
         <div class="search">

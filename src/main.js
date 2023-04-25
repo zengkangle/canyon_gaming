@@ -22,6 +22,14 @@ import { Carousel, CarouselItem, Image, Message, MessageBox, Avatar, Pagination,
 Vue.use(VueRouter)
 
 
+
+
+//引入图标组件
+import "./assets/js/fish-icon.js";
+//全局注册组件
+import SvgIcon from "@/components/Iconfont.vue";
+Vue.component("svg-icon", SvgIcon);
+
 //全局组件
 Vue.component('el-carousel', Carousel);
 Vue.component('el-carousel-item', CarouselItem);

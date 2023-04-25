@@ -10,6 +10,9 @@ import Live from '../pages/Live'
 import login from "../components/login"
 import enroll from "../components/enroll"
 
+//鱼吧路由
+import Fish from "../pages/Fish"
+
 
 //创建一个路由器
 const router = new VueRouter({
@@ -31,9 +34,22 @@ const router = new VueRouter({
                     path: 'live',
                     component: Live,
                     meta: { title: '直播页面' },
+                },
+                {
+                    path: 'fish',
+                    component: Fish,
+                    meta: { title: 'Canyon游戏直播' },
                 }
             ]
         },
+
+        // {
+        //     path:'/fish',
+        //     component:fish,
+
+        // },
+
+
         {
             path: '/Canyon_Gaming_Starter',
             component: Starter,
