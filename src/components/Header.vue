@@ -81,7 +81,6 @@ export default {
 .headerwarp {
   width: 100vw;
   position: fixed;
-  /* background-color: #2d2e36; */
   background-color: #080411;
   z-index: 10;
 }

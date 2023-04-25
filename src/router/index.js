@@ -5,7 +5,7 @@ import VueRouter from "vue-router";
 import Base from "../pages/Base"
 import Starter from '../pages/Starter'
 import Home from '../pages/Home'
-
+import Live from '../pages/Live'
 //用户注册登录路由
 import login from "../components/login"
 import enroll from "../components/enroll"
@@ -16,7 +16,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect:'/base/home',
+            redirect: '/base/home',
         },
         {
             path: '/base',
@@ -26,6 +26,11 @@ const router = new VueRouter({
                     path: 'home',
                     component: Home,
                     meta: { title: 'Canyon游戏直播' },
+                },
+                {
+                    path: 'live',
+                    component: Live,
+                    meta: { title: '直播页面' },
                 }
             ]
         },
@@ -33,22 +38,22 @@ const router = new VueRouter({
             path: '/Canyon_Gaming_Starter',
             component: Starter,
             meta: { title: 'Canyon_Gaming_Starter' },
-            children:[
+            children: [
                 //登录界面路由
                 {
-                    path:'/',
-                    component:login,
+                    path: '/',
+                    component: login,
                 },
                 //注册路由
                 {
-                    path:'enroll',
-                    component:enroll
+                    path: 'enroll',
+                    component: enroll
                 }
 
 
             ]
         },
-        
+
 
     ]
 })

@@ -1,15 +1,15 @@
 <template>
   <div class="home">
     <Swiper />
-    <LiveListHeader/>
+    <LiveListHeader />
     <CardList />
-    <Pageination  class="pi"/>
+    <Pageination class="pi" />
   </div>
 </template>
 
 <script>
 import Swiper from "../components/Swiper";
-import LiveListHeader from '../components/LiveListHeader'
+import LiveListHeader from "../components/LiveListHeader";
 import CardList from "../components/CardList";
 import Pageination from "../components/Pageination";
 
@@ -27,10 +27,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .home {
-  /* position: absolute; */
+  margin-left: 200px;
+  width: 1400px;
+  margin: 0 auto;
+  padding-top: 80px;
   background-color: #e5e7eb;
 }
-.pi{
+.pi {
   padding-bottom: 15px;
 }
 </style>
