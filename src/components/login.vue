@@ -19,7 +19,7 @@
       ></el-input>
     </div>
     <div class="login_buttons">
-      <el-button class="login_register">登录</el-button>
+      <el-button class="login_register" @click="login">登录</el-button>
     </div>
   </div>
 </template>
@@ -33,6 +33,21 @@ export default {
         password:''
     };
   },
+  methods:{
+    login(){
+      if(this.account=="" || this.password==""){
+        this.$message({
+          showClose: true,
+          message: '请输入账号或密码',
+          type: 'error'
+        });
+      }
+      // 将验证账号密码 推送到服务器
+
+
+      
+    }
+  }
 };
 </script>
 

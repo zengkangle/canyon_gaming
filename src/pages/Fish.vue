@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="commit-editor">
-              <el-button type="success">成功按钮</el-button>
+              <el-button type="success" @click="release">发表</el-button>
             </div>
           </div>
         </div>
@@ -73,9 +73,9 @@
               />
             </div>
             <div class="wb_card-wbDetail_content">
-              <div class="wb_card-wbInfo"><span>阿涛皎月Carry</span></div>
+              <div class="wb_card-wbInfo"><span class="user-name">阿涛皎月Carry</span></div>
               <div class="wb_card-wbFrom_time">
-                <span>2023-04-13 16:16 1.4万阅读</span>
+                <span class="push-info">2023-04-13 16:16 1.4万阅读</span>
               </div>
               <div class="wb_card-wbFrom_content">
                 <p>asd</p>
@@ -102,8 +102,65 @@
         </div>
       </div>
       <div class="main-right">
-        <div class="user_card-cardMask-MA1Fm">我是用户</div>
-        <div class="index-baradmin-qTCGA">热门主播推荐</div>
+        <div class="user_card">
+          <div class="user_card-userFace">
+            <img
+              src="https://apic.douyucdn.cn/upload/avatar_v3/201902/e0d05413f49f4319910a51c6e17f099a_middle.jpg"
+              class="user_card-userImg"
+              style="
+                border-radius: 50%;
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+              "
+            />
+            <div class="user_card-userName">
+              <span>KAone</span>
+            </div>
+          </div>
+          <div class="user_card-userInfoWrap">
+            <ul class="user_card-userAtten">
+              <li>
+                <strong>15</strong>
+                <span>关注</span>
+              </li>
+              <li>
+                <strong>999</strong>
+                <span>粉丝</span>
+              </li>
+              <li>
+                <strong>0</strong>
+                <span>动态</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="index-recommend">
+          <div class="index-title">热门主播推荐</div>
+          <div class="index-content">
+            <div class="index-item">
+              <img
+                class="index-icon"
+                src="https://apic.douyucdn.cn/upload/avatar_v3/202103/781508179eb44dc394fa171ebf441892_big.jpg"
+              />
+              <div class="index-icon-name">小白</div>
+            </div>
+            <div class="index-item">
+              <img
+                class="index-icon"
+                src="https://apic.douyucdn.cn/upload/avatar_v3/202103/781508179eb44dc394fa171ebf441892_big.jpg"
+              />
+              <div class="index-icon-name">小白</div>
+            </div>
+            <div class="index-item">
+              <img
+                class="index-icon"
+                src="https://apic.douyucdn.cn/upload/avatar_v3/202103/781508179eb44dc394fa171ebf441892_big.jpg"
+              />
+              <div class="index-icon-name">小白</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -118,8 +175,19 @@ export default {
   data() {
     return {
       textarea: "",
+      post:[],
     };
+
   },
+  methods:{
+    release(){
+      // 将输入的内容推送到页面
+
+    }
+  },
+  created(){
+    // 初始化已有的帖子
+  }
 };
 </script>
 
@@ -153,7 +221,7 @@ export default {
 }
 .fish-all {
   margin-left: 200px;
-  width: 1400px;
+  width: 1020px;
   margin: 0 auto;
   padding-top: 80px;
 }
@@ -164,7 +232,7 @@ export default {
 }
 
 .home-homeMain {
-  background-color: aquamarine;
+  background-color:rgba(0,0,0,0.2);
   /* margin-top: 115px; */
   /* width: 1000px; */
   margin-right: auto;
@@ -173,9 +241,9 @@ export default {
 }
 
 .main-content {
-  background-color: red;
+  background-color:rgba(0,0,0,0.2);
 
-  width: 730px;
+  width: 800px;
   height: 800px;
   margin-left: 10px;
   padding-left: 10px;
@@ -186,9 +254,10 @@ export default {
 }
 
 .main-content-editorWrap {
-  background-color: burlywood;
+  background-color: white;
   padding-top: 5px;
   padding: 5px;
+  margin-top: 10px;
 }
 
 .common-editorText {
@@ -223,9 +292,9 @@ export default {
 }
 
 .wb_card-wbCardWrap {
-  background-color: blueviolet;
+  background-color: #fff;
   padding: 20px;
-
+  /* background-color:rgba(0,0,0,0.4); */
   /* height: 270px; */
   overflow: hidden;
   margin: auto;
@@ -246,7 +315,7 @@ export default {
 
 .wb_card-wbDetail_content {
   float: left;
-  background-color: burlywood;
+  background-color: white;
   /* width: 400px;
   height: 400px; */
   margin-left: 10px;
@@ -263,9 +332,10 @@ export default {
 }
 
 .wb_footer {
+  border-top: 1px solid  #E8E8E8;
   width: 730px;
   height: 44px;
-  background-color: cyan;
+  background-color: white;
 }
 
 ul {
@@ -292,15 +362,106 @@ li:last-child {
   width: 100%;
 }
 
-.user_card-cardMask-MA1Fm {
+.user_card {
+  margin-top: 10px;
   width: 100%;
-  height: 78px;
-  background-color: yellow;
+  overflow: hidden;
+  background-color: white;
 }
 
-.index-baradmin-qTCGA {
+.index-recommend {
   width: 100%;
   height: 335px;
-  background-color: thistle;
+  margin-top: 30px;
+  background-color: white;
 }
+
+.user_card-userFace {
+  display: flex;
+}
+
+.user_card-userImg {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+.user_card-userName {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.user_card-userInfoWrap {
+  border-top: 1px solid black;
+}
+
+.user_card-userAtten {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: space-between;
+}
+
+.user_card-userAtten li {
+  flex-grow: 1;
+}
+
+.index-title {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 3px;
+  color: black;
+  font-size: 18px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.index-content {
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 16px 6px 16px 14px;
+}
+
+.index-icon {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.index-item {
+  cursor: pointer;
+  float: left;
+  width: 72px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+
+
+.index-icon-name{
+      color: #333;
+    font-size: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 72px;
+    height: 28px;
+    text-align: center;
+}
+
+
+
+
+
+.user-name{
+  color: black;
+}
+
+.push-info{
+  color: grey;
+}
+
 </style>
