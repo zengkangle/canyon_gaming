@@ -122,7 +122,7 @@ export default {
   margin-right: 0;
   flex-grow: 3;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .right > a,
 .avatar {
