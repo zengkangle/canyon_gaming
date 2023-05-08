@@ -1,6 +1,6 @@
 <template>
   <div class="login_background">
-    <div><img height="70px" src="../assets/logo.png"></div>
+    <div><img height="70px" src="../assets/logo.png" @click="goHome"></div>
 
     <div class="all_outside">
       <div class="title-header">
@@ -36,6 +36,7 @@ export default {
       a: true,
     };
   },
+
   methods: {
     go() {
       if (this.a) {
@@ -48,6 +49,9 @@ export default {
         this.a = true;
       }
     },
+    goHome(){
+      this.$router.push("/")
+    }
   },
 };
 </script>

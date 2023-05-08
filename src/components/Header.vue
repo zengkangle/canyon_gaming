@@ -29,12 +29,13 @@
         </router-link>
         <router-link class="right_item" to="/11">
           <i class="iconfont">&#xe754;</i>
-          <div>开播</div>
+          <div @click="toliving">开播</div>
         </router-link>
         <div class="avatar">
           <el-avatar
             src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
             :size="45"
+            @click="usercenter"
           ></el-avatar>
         </div>
         <div class="login">
@@ -54,6 +55,14 @@ export default {
       input: "",
     };
   },
+  mounted:{
+    usercenter(){
+      console.log('asdasdas')
+      this.$router.push({
+        path:'/base/user_self'
+      })
+    }
+  }
 };
 </script>
 

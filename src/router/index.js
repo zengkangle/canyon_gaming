@@ -12,6 +12,18 @@ import enroll from "../components/enroll"
 
 //鱼吧路由
 import Fish from "../pages/Fish"
+// import { join } from "core-js/core/array";
+
+//开播申请
+import Living from "../pages/Living";
+
+//用户中心
+import user_self from "../components/User_Self"
+//用户中心下的子模块
+import user_myInfo from "../components/user_myInfo"
+import user_wallet from "../components/user_wallet"
+import user_concern from "../components/user_concern"
+
 
 
 //创建一个路由器
@@ -39,6 +51,33 @@ const router = new VueRouter({
                     path: 'fish',
                     component: Fish,
                     meta: { title: 'Canyon游戏直播' },
+                },
+                {
+                    path:'living',
+                    component:Living,
+                    meta:{title:'申请开播'},
+                },
+                {
+                    path:'user_self',
+                    component:user_self,
+                    meta:{title:'用户中心'}, 
+                    children:[
+                        {
+                            path:'user_myInfo',
+                            component:user_myInfo,
+                            meta:{title:'用户个人资料'}
+                        },
+                        {
+                            path:'user_wallet',
+                            component:user_wallet,
+                            meta:{title:'用户钱包中心'}
+                        },
+                        {
+                            path:'user_concern',
+                            component:user_concern,
+                            meta:{title:'用户关注中心'}
+                        },
+                    ]
                 }
             ]
         },
