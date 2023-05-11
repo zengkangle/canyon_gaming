@@ -24,6 +24,7 @@ export default {
   padding-top: 80px;
   background-color: #FFF;
   display: flex;
+  background-image: none;
 }
 .right{
   flex-grow: 1;

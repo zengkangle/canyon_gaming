@@ -56,12 +56,12 @@
               <el-dropdown-item @click.native="toPerson" icon="el-icon-plus"
                 >修改个人信息</el-dropdown-item
               >
-              <el-dropdown-item @click.native="toControl" icon="el-icon-plus"
+              <el-dropdown-item @click.native="toControl" icon="el-icon-setting"
                 >管理系统</el-dropdown-item
               >
               <el-dropdown-item
                 @click.native="logout"
-                icon="el-icon-circle-plus"
+                icon="el-icon-switch-button"
                 >退出</el-dropdown-item
               >
             </el-dropdown-menu>
