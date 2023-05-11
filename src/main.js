@@ -19,7 +19,7 @@ import './theme/index.css'
 import {
   Carousel, CarouselItem, Image, Message,
   MessageBox, Avatar, Pagination, Input, Button,
-  Backtop, FormItem, Form, Menu, MenuItem, Divider,
+  Backtop, FormItem, Form, Menu, MenuItem, Dropdown, DropdownMenu, DropdownItem
 } from 'element-ui'
 
 //应用插件
@@ -45,7 +45,9 @@ Vue.component('el-button', Button);
 Vue.component('el-backtop', Backtop);
 Vue.component('el-form-item', FormItem);
 Vue.component('el-form', Form);
-Vue.component('el-divider', Divider);
+Vue.component('el-dropdown', Dropdown);
+Vue.component('el-dropdown-menu', DropdownMenu);
+Vue.component('el-dropdown-item', DropdownItem);
 Vue.component('el-menu', Menu);
 Vue.component('el-menu-item', MenuItem);
 
