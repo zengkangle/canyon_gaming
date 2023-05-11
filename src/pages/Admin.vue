@@ -1,8 +1,7 @@
 <template>
   <div class="admin">
     <SideBar />
-    <div class="fixed-height">aa</div>
-    <router-view></router-view>
+    <router-view class="right"></router-view>
   </div>
 </template>
 
@@ -26,7 +25,7 @@ export default {
   background-color: #FFF;
   display: flex;
 }
-.fixed-height{
-    height: 80vh;
+.right{
+  flex-grow: 1;
 }
 </style>

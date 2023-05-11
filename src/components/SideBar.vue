@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-
+    <div class="title">角色</div>
     <div class="menugroup">
       <router-link
         to="/base/admin/manageUser"
@@ -14,7 +14,7 @@
         ><i class="iconfont">&#xff1b;</i>用户管理</router-link
       >
     </div>
-    <div class="divide"></div>
+    <!-- <div class="divide"></div> -->
     <div class="menugroup">
       <router-link
         to="/base/admin/manageStreamer"
@@ -29,6 +29,7 @@
       >
     </div>
     <div class="divide"></div>
+    <div class="title">显示</div>
     <div class="menugroup">
       <router-link
         to="/base/admin/manageTheme"
@@ -43,6 +44,7 @@
       >
     </div>
     <div class="divide"></div>
+    <div class="title">信息</div>
     <div class="menugroup">
       <router-link
         to="/base/admin/manageScheduling"
@@ -56,7 +58,7 @@
         ><i class="iconfont">&#xe75e;</i>排班管理</router-link
       >
     </div>
-    <div class="divide"></div>
+    <!-- <div class="divide"></div> -->
     <div class="menugroup">
       <router-link
         to="/base/admin/manageMessage"
@@ -71,6 +73,7 @@
       >
     </div>
     <div class="divide"></div>
+    <div class="title">数据</div>
     <div class="menugroup">
       <router-link
         to="/base/admin/statisticalAnalysis"
@@ -114,25 +117,25 @@ export default {
 }
 .menu {
   height: 80vh;
+  margin-right: 25px;
 }
 .menu-item {
   display: block;
   color: #1f2328;
-  /* height: 50px; */
   width: 300px;
   padding: 0 10px;
-  line-height: 30px;
-  margin: 5px 2px 5px 7px;
+  line-height: 35px;
+  margin: 1px 0 2px 7px;
 }
 .menu-item:hover{
   background-color: #f4f5f7;
-  border-radius: 5px;
+  border-radius: 7px;
   cursor: pointer;
 }
 .m-item-active {
   background-color: #f4f5f7;
-  border-radius: 5px;
-  font-weight: bold;
+  border-radius: 7px;
+  font-weight:550;
   cursor: pointer;
 }
 i {
@@ -143,6 +146,7 @@ i {
   width: 100%;
   height: 1px;
   background-color: #d8dee4;
+  margin: 3px 0;
 }
 .right {
   display: block;
@@ -160,5 +164,11 @@ i {
 }
 .menugroup {
   display: flex;
+}
+.title{
+  font-size: 12px;
+  color: #656d76;
+  /* margin-left: 23px; */
+  margin:2px 23px;
 }
 </style>
