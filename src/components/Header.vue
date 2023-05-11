@@ -3,7 +3,7 @@
     <div class="header">
       <div><img src="../assets/logo.png" alt="" height="60px" /></div>
       <div class="menu">
-        <router-link to="/" active-class="menu_active">首页</router-link>
+        <router-link to="/base/home" active-class="menu_active">首页</router-link>
         <router-link to="/11" active-class="menu_active">视频</router-link>
         <router-link to="/22" active-class="menu_active">赛事</router-link>
         <router-link to="/base/fish" active-class="menu_active">鱼吧</router-link>
