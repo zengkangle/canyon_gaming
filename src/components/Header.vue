@@ -53,7 +53,7 @@
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="toPerson" icon="el-icon-plus"
+              <el-dropdown-item @click.native="toPerson" icon="el-icon-user"
                 >修改个人信息</el-dropdown-item
               >
               <el-dropdown-item @click.native="toControl" icon="el-icon-setting"
