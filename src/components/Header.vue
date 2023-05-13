@@ -39,7 +39,6 @@
           <el-avatar
             src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
             :size="45"
-            @click="usercenter"
           ></el-avatar>
         </div>
         <div class="login">
@@ -54,7 +53,7 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="toPerson" icon="el-icon-user"
-                >修改个人信息</el-dropdown-item
+                >个人信息</el-dropdown-item
               >
               <el-dropdown-item @click.native="toControl" icon="el-icon-setting"
                 >管理系统</el-dropdown-item
@@ -81,6 +80,9 @@ export default {
     };
   },
   methods: {
+    toPerson(){
+      this.$router.push("/base/admin/manageUser");
+    },
     toControl() {
       this.$router.push("/base/admin/manageUser");
     },
@@ -89,14 +91,6 @@ export default {
       // this.$store.dispatch("getUserFromSession");
       this.$message.success("退出成功");
       this.$router.push("/");
-    },
-  },
-  mounted: {
-    usercenter() {
-      console.log("asdasdas");
-      this.$router.push({
-        path: "/base/user_self",
-      });
     },
   },
 };
