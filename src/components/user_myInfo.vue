@@ -34,7 +34,7 @@
             </div>
 
             <div class="button_union">
-              <el-button round>修改手机</el-button>
+              <el-button round @click="modify_phone">修改手机</el-button>
             </div>
           </li>
 
@@ -46,7 +46,7 @@
               <span>密码强度：低</span>
             </div>
             <div class="button_union">
-              <el-button round>修改密码</el-button>
+              <el-button round  @click="modify_password">修改密码</el-button>
             </div>
           </li>
 
@@ -59,7 +59,7 @@
               <span>邮箱：1232323232@qq.com</span>
             </div>
             <div class="button_union">
-              <el-button round>修改邮箱</el-button>
+              <el-button round @click="modify_email">修改邮箱</el-button>
             </div>
           </li>
 
@@ -72,7 +72,7 @@
               <span>尚未实名认证</span>
             </div>
             <div class="button_union">
-              <el-button round>修改邮箱</el-button>
+              <el-button round>实名认证</el-button>
             </div>
           </li>
         </ul>
@@ -94,16 +94,43 @@
         </div>
       </el-upload>
     </div>
+
+    <popup :showpo=showpo ref='popup'  @close='clo'></popup>
+    
+
   </div>
 </template>
 
 <script>
+import popup from '../components/popup.vue'
 export default {
   name: "user_myInfo",
-  data() {
-    return {};
+  components:{
+      popup
   },
-  methods: {},
+  data() {
+    return {
+      showpo:false,
+      
+    };
+  },
+  methods: {
+    modify_phone(){
+      this.showpo=true,
+      this.$refs.popup.get_show('p',true)
+    },
+    modify_email(){
+      this.showpo=true,
+      this.$refs.popup.get_show('e',true)
+    },
+    modify_password(){
+      this.showpo=true,
+      this.$refs.popup.get_show('w',true)
+    },
+    clo(){
+      this.showpo=false
+    }
+  },
 };
 </script>
 
