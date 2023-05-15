@@ -16,9 +16,11 @@ import request from './utils/request'
 import './theme/index.css'
 
 //按需引入ElementUI组件
-import { Carousel, CarouselItem, Image, Message, 
-  MessageBox, Avatar, Pagination, Input, Button , 
-  Backtop,FormItem,Form, Upload} from 'element-ui'
+import {
+  Carousel, CarouselItem, Image, Message,
+  MessageBox, Avatar, Pagination, Input, Button,
+  Backtop, FormItem, Form, Dropdown, DropdownMenu, DropdownItem, Table, TableColumn, Dialog,
+Upload} from 'element-ui'
 
 //应用插件
 Vue.use(VueRouter)
@@ -43,6 +45,12 @@ Vue.component('el-button', Button);
 Vue.component('el-backtop', Backtop);
 Vue.component('el-form-item', FormItem);
 Vue.component('el-form', Form);
+Vue.component('el-dropdown', Dropdown);
+Vue.component('el-dropdown-menu', DropdownMenu);
+Vue.component('el-dropdown-item', DropdownItem);
+Vue.component('el-table', Table);
+Vue.component('el-table-column', TableColumn);
+Vue.component('el-dialog', Dialog);
 Vue.component('el-upload',Upload)
 
 

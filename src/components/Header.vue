@@ -3,10 +3,14 @@
     <div class="header">
       <div><img src="../assets/logo.png" alt="" height="60px" /></div>
       <div class="menu">
-        <router-link to="/" active-class="menu_active">首页</router-link>
+        <router-link to="/base/home" active-class="menu_active"
+          >首页</router-link
+        >
         <router-link to="/11" active-class="menu_active">视频</router-link>
         <router-link to="/22" active-class="menu_active">赛事</router-link>
-        <router-link to="/base/fish" active-class="menu_active">鱼吧</router-link>
+        <router-link to="/base/fish" active-class="menu_active"
+          >鱼吧</router-link
+        >
       </div>
       <div class="right">
         <div class="search">
@@ -35,12 +39,32 @@
           <el-avatar
             src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
             :size="45"
-            @click="usercenter"
           ></el-avatar>
         </div>
         <div class="login">
-          亲爱的召唤师，欢迎
-          <router-link to="/Canyon_Gaming_Starter">登录</router-link>
+          <div class="welcome">
+            亲爱的召唤师，欢迎
+            <router-link to="/Canyon_Gaming_Starter">登录</router-link>
+          </div>
+          <el-dropdown>
+            <span class="el-dropdown-link"
+              >aaa
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="toPerson" icon="el-icon-user"
+                >个人信息</el-dropdown-item
+              >
+              <el-dropdown-item @click.native="toControl" icon="el-icon-setting"
+                >管理系统</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click.native="logout"
+                icon="el-icon-switch-button"
+                >退出</el-dropdown-item
+              >
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </div>
     </div>
@@ -55,14 +79,20 @@ export default {
       input: "",
     };
   },
-  mounted:{
-    usercenter(){
-      console.log('asdasdas')
-      this.$router.push({
-        path:'/base/user_self'
-      })
-    }
-  }
+  methods: {
+    toPerson(){
+      this.$router.push("/base/admin/manageUser");
+    },
+    toControl() {
+      this.$router.push("/base/admin/manageUser");
+    },
+    logout() {
+      // sessionStorage.removeItem("user");
+      // this.$store.dispatch("getUserFromSession");
+      this.$message.success("退出成功");
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
@@ -131,7 +161,7 @@ export default {
   margin-right: 0;
   flex-grow: 3;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .right > a,
 .avatar {
@@ -155,7 +185,7 @@ export default {
   margin-left: 10px;
   color: white;
 }
-.login > a {
+.welcome > a {
   color: blanchedalmond;
 }
 .search {
@@ -173,5 +203,12 @@ export default {
 .esearch {
   border-radius: 0 4px 4px 0;
   z-index: 9;
+}
+.welcome {
+  display: none;
+}
+.el-dropdown-link {
+  color: #fff;
+  cursor: pointer;
 }
 </style>

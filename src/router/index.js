@@ -6,6 +6,13 @@ import Base from "../pages/Base"
 import Starter from '../pages/Starter'
 import Home from '../pages/Home'
 import Live from '../pages/Live'
+import Admin from '../pages/Admin'
+import AdminManageMessage from '../pages/AdminManageMessage'
+import AdminManageScheduling from '../pages/AdminManageScheduling'
+import AdminManageStreamer from '../pages/AdminManageStreamer'
+import AdminManageTheme from '../pages/AdminManageTheme'
+import AdminManageUser from '../pages/AdminManageUser'
+import AdminStatisticalAnalysis from '../pages/AdminStatisticalAnalysis'
 //用户注册登录路由
 import login from "../components/login"
 import enroll from "../components/enroll"
@@ -53,42 +60,71 @@ const router = new VueRouter({
                     meta: { title: 'Canyon游戏直播' },
                 },
                 {
-                    path:'living',
-                    component:Living,
-                    meta:{title:'申请开播'},
+                    path: 'living',
+                    component: Living,
+                    meta: { title: '申请开播' },
                 },
                 {
-                    path:'user_self',
-                    component:user_self,
-                    meta:{title:'用户中心'}, 
-                    children:[
+                    path: 'user_self',
+                    component: user_self,
+                    meta: { title: '用户中心' },
+                    children: [
                         {
-                            path:'user_myInfo',
-                            component:user_myInfo,
-                            meta:{title:'用户个人资料'}
+                            path: 'user_myInfo',
+                            component: user_myInfo,
+                            meta: { title: '用户个人资料' }
                         },
                         {
-                            path:'user_wallet',
-                            component:user_wallet,
-                            meta:{title:'用户钱包中心'}
+                            path: 'user_wallet',
+                            component: user_wallet,
+                            meta: { title: '用户钱包中心' }
                         },
                         {
-                            path:'user_concern',
-                            component:user_concern,
-                            meta:{title:'用户关注中心'}
+                            path: 'user_concern',
+                            component: user_concern,
+                            meta: { title: '用户关注中心' }
                         },
                     ]
-                }
+                },
+                {
+                    path: 'admin',
+                    component: Admin,
+                    meta: { title: '管理中心' },
+                    children: [
+                        {
+                            path: 'manageMessage',
+                            component: AdminManageMessage,
+                            meta: { title: '消息管理' }
+                        },
+                        {
+                            path: 'manageScheduling',
+                            component: AdminManageScheduling,
+                            meta: { title: '排班管理' }
+                        },
+                        {
+                            path: 'manageStreamer',
+                            component: AdminManageStreamer,
+                            meta: { title: '播主管理' }
+                        },
+                        {
+                            path: 'manageTheme',
+                            component: AdminManageTheme,
+                            meta: { title: '主题管理' }
+                        },
+                        {
+                            path: 'manageUser',
+                            component: AdminManageUser,
+                            meta: { title: '用户管理' }
+                        },
+                        {
+                            path: 'statisticalAnalysis',
+                            component: AdminStatisticalAnalysis,
+                            meta: { title: '统计分析' }
+                        },
+                    ]
+                },
             ]
         },
-
-        // {
-        //     path:'/fish',
-        //     component:fish,
-
-        // },
-
-
         {
             path: '/Canyon_Gaming_Starter',
             component: Starter,
