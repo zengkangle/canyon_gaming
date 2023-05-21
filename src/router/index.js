@@ -13,16 +13,14 @@ import AdminManageStreamer from '../pages/AdminManageStreamer'
 import AdminManageTheme from '../pages/AdminManageTheme'
 import AdminManageUser from '../pages/AdminManageUser'
 import AdminStatisticalAnalysis from '../pages/AdminStatisticalAnalysis'
+import ApplyStreamer from "../pages/ApplyStreamer";
+import OpenLive from "../pages/OpenLive";
 //用户注册登录路由
 import login from "../components/login"
 import enroll from "../components/enroll"
 
 //鱼吧路由
 import Fish from "../pages/Fish"
-// import { join } from "core-js/core/array";
-
-//开播申请
-import Living from "../pages/Living";
 
 //用户中心
 import user_self from "../components/User_Self"
@@ -47,79 +45,84 @@ const router = new VueRouter({
                 {
                     path: 'home',
                     component: Home,
-                    meta: { title: 'Canyon游戏直播' },
+                    meta: {title: 'Canyon游戏直播'},
                 },
                 {
                     path: 'live',
                     component: Live,
-                    meta: { title: '直播页面' },
+                    meta: {title: '直播页面'},
                 },
                 {
                     path: 'fish',
                     component: Fish,
-                    meta: { title: 'Canyon游戏直播' },
+                    meta: {title: 'Canyon游戏直播'},
                 },
                 {
-                    path: 'living',
-                    component: Living,
-                    meta: { title: '申请开播' },
+                    path: 'apply_streamer',
+                    component: ApplyStreamer,
+                    meta: {title: '申请主播'},
+                },
+                {
+                    path: 'open_live',
+                    component: OpenLive,
+                    meta: {title: '我要开播'},
                 },
                 {
                     path: 'user_self',
                     component: user_self,
-                    meta: { title: '用户中心' },
+                    meta: {title: '用户中心'},
                     children: [
                         {
                             path: 'user_myInfo',
                             component: user_myInfo,
-                            meta: { title: '用户个人资料' }
+                            meta: {title: '用户个人资料'}
                         },
                         {
                             path: 'user_wallet',
                             component: user_wallet,
-                            meta: { title: '用户钱包中心' }
+                            meta: {title: '用户钱包中心'}
                         },
                         {
                             path: 'user_concern',
                             component: user_concern,
-                            meta: { title: '用户关注中心' }
+                            meta: {title: '用户关注中心'}
                         },
                     ]
                 },
                 {
                     path: 'admin',
                     component: Admin,
-                    meta: { title: '管理中心' },
+                    meta: {title: '管理中心'},
                     children: [
                         {
                             path: 'manageMessage',
                             component: AdminManageMessage,
-                            meta: { title: '消息管理' }
+                            meta: {title: '消息管理'}
                         },
                         {
                             path: 'manageScheduling',
                             component: AdminManageScheduling,
-                            meta: { title: '排班管理' }
+                            meta: {title: '排班管理'}
                         },
                         {
                             path: 'manageStreamer',
                             component: AdminManageStreamer,
-                            meta: { title: '播主管理' }
+                            meta: {title: '播主管理'}
                         },
                         {
                             path: 'manageTheme',
                             component: AdminManageTheme,
-                            meta: { title: '主题管理' }
+                            meta: {title: '主题管理'}
                         },
                         {
                             path: 'manageUser',
                             component: AdminManageUser,
-                            meta: { title: '用户管理' }
+                            meta: {title: '用户管理'}
                         },
                         {
                             path: 'statisticalAnalysis',
                             component: AdminStatisticalAnalysis,
-                            meta: { title: '统计分析' }
+                            meta: {title: '统计分析'}
                         },
                     ]
                 },
@@ -128,7 +131,7 @@ const router = new VueRouter({
         {
             path: '/Canyon_Gaming_Starter',
             component: Starter,
-            meta: { title: 'Canyon_Gaming_Starter' },
+            meta: {title: 'Canyon_Gaming_Starter'},
             children: [
                 //登录界面路由
                 {

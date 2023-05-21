@@ -57,7 +57,6 @@
       class="vio"
       controls
       autoplay
-      width="68%"
       muted
     ></video>
     <div class="video_footer">
@@ -112,7 +111,7 @@ export default {
 }
 .container {
   padding-top: 60px;
-  height: 1200px;
+  height: 1000px;
   width: 1400px;
   margin: 0 auto;
 }
@@ -192,7 +191,7 @@ export default {
   margin-top: 8px;
 }
 video {
-  height: 700px;
+  //height: 900px;
   width: 1400px;
 }
 .video_footer {
