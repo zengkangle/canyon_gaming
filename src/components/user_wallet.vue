@@ -4,7 +4,6 @@
         <img src="https://shark2.douyucdn.cn/front-publish/wallet-master/assets/images/wallet_88a1bf4.png">
         我的钱包
     </div>
-    <h3>钱包首页</h3>
     <div class="wallet_center_page">
         <div class="asset_box">
             <div class="title_l1sabh">资产余额(元)</div>
@@ -34,12 +33,6 @@
 
     <div class="for_height"></div>
 
-    <!-- <div class="wall_set">
-        <h3>收款方式设置</h3>
-        <div class="accounts">
-            <div class="accounts_item"></div>
-        </div>
-    </div> -->
 
   </div>
 </template>

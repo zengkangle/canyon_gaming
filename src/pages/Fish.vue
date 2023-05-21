@@ -73,9 +73,11 @@
               />
             </div>
             <div class="wb_card-wbDetail_content">
-              <div class="wb_card-wbInfo"><span class="user-name">阿涛皎月Carry</span></div>
+              <div class="wb_card-wbInfo">
+                <span class="user-name">阿涛皎月Carry</span>
+              </div>
               <div class="wb_card-wbFrom_time">
-                <span class="push-info">2023-04-13 16:16 1.4万阅读</span>
+                <span class="push-info">2023-04-13 16:16</span>
               </div>
               <div class="wb_card-wbFrom_content">
                 <p>asd</p>
@@ -87,7 +89,7 @@
         <div class="wb_footer">
           <ul>
             <li>
-              <i class="iconfont">&#xe603;</i>
+              <i class="iconfont" @click="show_comment">&#xe603;</i>
             </li>
             <li>
               <i class="iconfont">&#xe63d;</i>
@@ -163,6 +165,55 @@
         </div>
       </div>
     </div>
+
+    <el-dialog
+      title="评论"
+      :visible.sync="dialogVisible"
+      width="28%"
+      :before-close="handleClose"
+      class="dialog_main_body"
+    >
+      <div class="common-editorTextWrapper">
+        <div class="user_head_img">
+          <img
+            class="head_img"
+            src="https://apic.douyucdn.cn/upload/avatar_v3/201903/3dcec943761543ada419b5c845ebe04a_middle.jpg"
+          />
+        </div>
+        <div class="text_areas">
+          <el-input
+            class="mytextarea"
+            type="textarea"
+            placeholder="请输入内容"
+            v-model="textarea_comment"
+            resize="none"        
+          >
+          </el-input>
+        </div>
+        
+      </div>
+      <div class="dialog_empty">
+        <div class="dialog_button">
+          <el-button type="success" @click="release">发表</el-button>
+      </div>
+      </div>
+
+      <div class="rap"></div>
+      
+      <div class="root_comment">
+        <div class="root_img">
+          <img
+            src="https://apic.douyucdn.cn/upload/avatar_v3/201812/df4ca4c191024460b8f4b662451e4189_big.jpg"
+          />
+        </div>
+        <div class="main-right">
+          <div class="user_name">
+            <span>KAone</span>
+          </div>
+          <div class="user_content">我觉得很有前途</div>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -175,19 +226,19 @@ export default {
   data() {
     return {
       textarea: "",
-      post:[],
+      dialogVisible: false,
+      textarea_comment:'',
+      post: [],
     };
-
   },
-  methods:{
-    release(){
+  methods: {
+    release() {
       // 将输入的内容推送到页面
-
-    }
+    },
+    show_comment() {
+      this.dialogVisible = true;
+    },
   },
-  created(){
-    // 初始化已有的帖子
-  }
 };
 </script>
 
@@ -232,7 +283,7 @@ export default {
 }
 
 .home-homeMain {
-  background-color:rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   /* margin-top: 115px; */
   /* width: 1000px; */
   margin-right: auto;
@@ -241,7 +292,7 @@ export default {
 }
 
 .main-content {
-  background-color:rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 
   width: 800px;
   height: 800px;
@@ -332,7 +383,7 @@ export default {
 }
 
 .wb_footer {
-  border-top: 1px solid  #E8E8E8;
+  border-top: 1px solid #e8e8e8;
   width: 730px;
   height: 44px;
   background-color: white;
@@ -395,6 +446,16 @@ li:last-child {
   border-top: 1px solid black;
 }
 
+
+.user_card-userInfoWrap span{
+  font-size: 15px;
+}
+
+.user_card-userInfoWrap strong{
+  font-size: 16px;
+}
+
+
 .user_card-userAtten {
   display: flex;
   list-style: none;
@@ -413,7 +474,7 @@ li:last-child {
   padding-bottom: 3px;
   color: black;
   font-size: 18px;
-  border-bottom: 1px solid #E8E8E8;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .index-content {
@@ -439,29 +500,98 @@ li:last-child {
   margin-bottom: 8px;
 }
 
-
-
-.index-icon-name{
-      color: #333;
-    font-size: 15px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 72px;
-    height: 28px;
-    text-align: center;
+.index-icon-name {
+  color: #333;
+  font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 72px;
+  height: 28px;
+  text-align: center;
 }
 
-
-
-
-
-.user-name{
+.user-name {
   color: black;
 }
 
-.push-info{
+.push-info {
   color: grey;
 }
 
+.root_comment {
+  margin-bottom: 3px;
+  margin-left: 6px;
+  /* padding-bottom: 5px; */
+  position: relative;
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.root_comment img {
+  border-radius: 50%;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+}
+
+.root_img {
+  display: inline-block;
+}
+
+.dialog_main_body {
+  padding: 20px 10px;
+}
+
+.main-right {
+  margin-left: 20px;
+  margin-top: 3px;
+  font-size: 23px;
+}
+
+.user_name {
+  display: inline-block;
+  font-size: 17px;
+}
+
+.user_head_img{
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+
+}
+
+.common-editorTextWrapper {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+
+.head_img {
+  border-radius: 50%;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+}
+
+.text_areas{
+  width: 390px;
+  
+}
+
+.mytextarea{
+  height: 65px;
+}
+
+.dialog_empty{
+  display: flex;
+}
+
+.dialog_button{
+  margin-left: 390px;
+}
+
+.rap{
+  height: 20px;
+}
 </style>

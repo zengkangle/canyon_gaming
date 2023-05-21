@@ -25,6 +25,11 @@
 </template>
 
 <script>
+
+
+
+import axios from 'axios';
+import { Result } from 'element-ui';
 export default {
   name: "login",
   data() {
@@ -43,10 +48,12 @@ export default {
         });
       }
       // 将验证账号密码 推送到服务器
-
-
-      
     }
+  },
+  created(){
+    axios.get('/api/user').then(result=>{
+      console.log(result)
+    })
   }
 };
 </script>

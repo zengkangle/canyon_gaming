@@ -30,6 +30,8 @@ import user_self from "../components/User_Self"
 import user_myInfo from "../components/user_myInfo"
 import user_wallet from "../components/user_wallet"
 import user_concern from "../components/user_concern"
+//主播特有的子模块
+import living_data from "../components/living_data"
 
 
 
@@ -59,6 +61,9 @@ const router = new VueRouter({
                     component: Fish,
                     meta: { title: 'Canyon游戏直播' },
                 },
+
+                
+
                 {
                     path: 'living',
                     component: Living,
@@ -84,6 +89,11 @@ const router = new VueRouter({
                             component: user_concern,
                             meta: { title: '用户关注中心' }
                         },
+                        {
+                            path:"living_data",
+                            component:living_data,
+                            meta:{title:'直播数据显示'}
+                        }
                     ]
                 },
                 {
@@ -132,7 +142,7 @@ const router = new VueRouter({
             children: [
                 //登录界面路由
                 {
-                    path: '/',
+                    path: 'login',
                     component: login,
                 },
                 //注册路由

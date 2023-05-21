@@ -9,19 +9,20 @@
             <ul class="u_nav_ul">
                 <li>
                   <i class="iconfont">&#xe8a0;</i>
-                  <!-- <span>我的资料</span> -->
                   <router-link to="/base/user_self/user_myInfo">我的资料</router-link>
                   </li>
                 <li>
                   <i class="iconfont">&#xeb1a;</i>
-                  <!-- <span>钱包中心</span> -->
                   <router-link to="/base/user_self/user_wallet">钱包中心</router-link>
                 </li>
                 <li>
                   <i class="iconfont">&#xe600;</i>
-                  <!-- <span>我的关注</span> -->
                   <router-link to="/base/user_self/user_concern">我的关注</router-link>
-                  </li>
+                </li>
+                <li v-if="true">
+                  <i class="iconfont">&#xeb66;</i>
+                  <router-link to="/base/user_self/living_data">直播数据</router-link>
+                </li>
             </ul>
         </div>
         <div class="u_mainbody">
@@ -48,11 +49,12 @@ export default {
 <style scoped>
 
 
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
   font-family: 'iconfont';  /* Project id 3979529 */
-  src: url('//at.alicdn.com/t/c/font_3979529_mwrophqr3eq.woff2?t=1683466107167') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3979529_mwrophqr3eq.woff?t=1683466107167') format('woff'),
-       url('//at.alicdn.com/t/c/font_3979529_mwrophqr3eq.ttf?t=1683466107167') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3979529_voe5j3d06sr.woff2?t=1684336977276') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3979529_voe5j3d06sr.woff?t=1684336977276') format('woff'),
+       url('//at.alicdn.com/t/c/font_3979529_voe5j3d06sr.ttf?t=1684336977276') format('truetype');
 }
 
 
