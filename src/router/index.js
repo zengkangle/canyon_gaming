@@ -15,6 +15,11 @@ import AdminManageUser from '../pages/AdminManageUser'
 import AdminStatisticalAnalysis from '../pages/AdminStatisticalAnalysis'
 import ApplyStreamer from "../pages/ApplyStreamer";
 import OpenLive from "../pages/OpenLive";
+import HomeAll from "../pages/HomeAll";
+import HomeMobileGame from "../pages/HomeMobileGame";
+import HomeUnique from "../pages/HomeUnique";
+import HomeProfession from "../pages/HomeProfession";
+import HomeYunDing from "../pages/HomeYunDing";
 //用户注册登录路由
 import login from "../components/login"
 import enroll from "../components/enroll"
@@ -36,7 +41,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: '/base/home',
+            redirect: '/base/home/homeAll',
         },
         {
             path: '/base',
@@ -46,6 +51,29 @@ const router = new VueRouter({
                     path: 'home',
                     component: Home,
                     meta: {title: 'Canyon游戏直播'},
+                    children:[
+                        {
+                            path: 'homeAll',
+                            component: HomeAll,
+                            meta: {title: 'Canyon游戏直播_全部'}
+                        },                        {
+                            path: 'homeMobileGame',
+                            component: HomeMobileGame,
+                            meta: {title: 'Canyon游戏直播_LOL手游'}
+                        },                        {
+                            path: 'homeUnique',
+                            component: HomeUnique,
+                            meta: {title: 'Canyon游戏直播_绝活'}
+                        },                        {
+                            path: 'homeProfession',
+                            component: HomeProfession,
+                            meta: {title: 'Canyon游戏直播_职业'}
+                        },                        {
+                            path: 'homeYunDing',
+                            component: HomeYunDing,
+                            meta: {title: 'Canyon游戏直播_云顶之弈'}
+                        },
+                    ]
                 },
                 {
                     path: 'live',

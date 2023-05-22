@@ -1,6 +1,19 @@
 <template>
-    <div class="cardlist">
-        <Card v-for="item in Cards" :key="item.id" :item="item" class="it"/>
+    <div>
+        <div class="cardlist">
+            <Card v-for="item in Cards" :key="item.username" :item="item" class="it"/>
+        </div>
+        <el-pagination
+                :background="true"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                layout="prev, pager, next, jumper"
+                :current-page="pageMsg.currentPage"
+                :page-size="pageMsg.pageSize"
+                :total="pageMsg.total"
+                class="page"
+        >
+        </el-pagination>
     </div>
 </template>
 
@@ -9,156 +22,47 @@ import Card from "../components/Card";
 
 export default {
     name: "CardList",
+    props:['theme'],
     data() {
         return {
-            Cards: [
-                {
-                    width: "",
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1073/bb/3067534226d20fa2cabbac88ac2e00_1_1674994580.jpg?imageview/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-                {
-                    id: "1",
-                    title: "标题",
-                    nick: "昵称",
-                    hotnum: "66.4万",
-                    imgsrc:
-                        "https://anchorpost.msstatic.com/cdnimage/anchorpost/1019/39/cd06b1566ce498c7dcaa3f05181611_0_1675840426.jpg?spformat=png,webp&imageview/4/0/w/338/h/190/blur/1/format/webp",
-                },
-            ],
+            pageMsg: {
+                pageSize: 10,
+                currentPage: 1,
+                total: 0,
+                theme: ''
+            },
+            Cards: [],
         };
+    },
+    methods: {
+        change() {
+            this.request.get(
+                "/liveroom/show",
+                {
+                    params: this.pageMsg
+                }
+            ).then(res => {
+                    console.log(res);
+                    this.Cards=res.data;
+                    if (res.data.length!==0) {
+                        this.pageMsg.total=res.data[0].pagenum;
+                    }else{
+                        this.pageMsg.total=0;
+                    }
+            }).catch();
+        },
+        handleSizeChange(val) {
+            this.pageMsg.currentPage=val;
+            this.change();
+        },
+        handleCurrentChange(val) {
+            this.pageMsg.currentPage=val;
+            this.change();
+        },
+    },
+    mounted() {
+        this.pageMsg.theme=this.theme;
+        this.change();
     },
     components: {
         Card,
@@ -183,5 +87,10 @@ export default {
     box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     border-radius: 3%;;
     cursor: pointer;
+}
+
+.page {
+    padding-bottom: 15px;
+    text-align: center;
 }
 </style>
