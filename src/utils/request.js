@@ -2,7 +2,7 @@ import axios from 'axios'
 import {Message} from 'element-ui'
 
 const request = axios.create({
-	baseURL: 'http://localhost:9090',  // 全局统一加上了 后端接口前缀 ，后端必须进行跨域配置！
+	baseURL: 'http://localhost:8008',  // 全局统一加上了 后端接口前缀 ，后端必须进行跨域配置！
     timeout: 5000
 })
 
@@ -14,6 +14,7 @@ request.interceptors.request.use(config => {
     let user = sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")) : null
     if(user){
         config.headers['token'] = user.token;  // 设置请求头
+        console.log(config.headers['token']);
     }
     return config
 }, error => {
