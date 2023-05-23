@@ -1,18 +1,18 @@
 <template>
     <div>
         <div class="card">
-            <el-image :src="item.imgsrc" fit="cover"></el-image>
-            <div class="title">{{ item.title }}</div>
+            <el-image :src="item.imgurl" fit="cover"></el-image>
+            <div class="title">{{ item.roomname }}</div>
             <div class="footer">
                 <el-avatar
                         src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
                         :size="25"
                 ></el-avatar>
-                <div class="nick">{{ item.nick }}</div>
+                <div class="nick">{{ item.username }}</div>
                 <div class="im">
                     <img src="../assets/hot.png" alt="" width="14px"/>
                 </div>
-                <div class="hot-num">{{ item.hotnum }}</div>
+                <div class="hot-num">{{ item.degreeofeat }}</div>
             </div>
         </div>
     </div>

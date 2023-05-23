@@ -1,19 +1,19 @@
 <template>
   <div class="header">
     <div class="title">英雄联盟</div>
-    <router-link to="/" class="text" active-class="text_active">
+    <router-link to="/base/home/homeAll" class="text" active-class="text_active">
       全部</router-link
     >
-    <router-link to="/1" class="text" active-class="text_active">
+    <router-link to="/base/home/homeProfession" class="text" active-class="text_active">
       职业</router-link
     >
-    <router-link to="/1" class="text" active-class="text_active">
+    <router-link to="/base/home/homeUnique" class="text" active-class="text_active">
       绝活</router-link
     >
-    <router-link to="/2" class="text2" active-class="text2_active">
+    <router-link to="/base/home/homeYunDing" class="text2" active-class="text2_active">
       云顶之奕</router-link
     >
-    <router-link to="/2" class="text2" active-class="text2_active">
+    <router-link to="/base/home/homeMobileGame" class="text2" active-class="text2_active">
       LOL手游</router-link
     >
   </div>
