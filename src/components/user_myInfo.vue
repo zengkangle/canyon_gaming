@@ -157,8 +157,10 @@ export default {
 
 .user_myInfo_outside {
   /* margin-left: 20px; */
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
+  height: 742px;
+  width: 645px;
 }
 
 .togglebtn_clearfix {

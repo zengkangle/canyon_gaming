@@ -30,6 +30,7 @@ import user_wallet from "../components/user_wallet"
 import user_concern from "../components/user_concern"
 //主播特有的子模块
 import living_data from "../components/living_data"
+import anchor_table from "../components/anchor_table"
 
 
 
@@ -96,6 +97,11 @@ const router = new VueRouter({
                             path:"living_data",
                             component:living_data,
                             meta:{title:'直播数据显示'}
+                        },
+                        {
+                            path:"time_data",
+                            component:anchor_table,
+                            meta:{title:'排班展示'}
                         }
                     ]
                 },

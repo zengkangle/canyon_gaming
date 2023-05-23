@@ -29,6 +29,34 @@
         </template>
       </el-table-column>
     </el-table>
+    <h3 class="apply_user">申请成为主播的用户列表</h3>
+    <el-table :data="userMsg" border>
+      <el-table-column prop="phone" label="账号/手机号" width="180">
+      </el-table-column>
+      <el-table-column prop="userName" label="昵称" width="180">
+      </el-table-column>
+      <el-table-column prop="gender" label="性别"> </el-table-column>
+      <el-table-column prop="email" label="邮箱"> </el-table-column>
+      <el-table-column prop="address" label="住址"> </el-table-column>
+      <el-table-column prop="level" label="用户级别">
+        <template slot-scope="scope">
+          {{ scope.row.level | showLevel }}
+        </template>
+      </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="agree_apply(scope.$index, scope.row)"
+            >同意</el-button
+          >
+          <el-button
+            size="mini"
+            type="danger"
+            @click="refuse_apply(scope.$index, scope.row)"
+            >拒绝</el-button
+          >
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -55,6 +83,13 @@ export default {
     handleDelete(index, row) {
       console.log(index, row);
     },
+    agree_apply(index, row){
+      //同意用户成为主播
+    },
+    refuse_apply(index, row){
+      //拒绝用户成为主播
+    }
+
   },
 };
 </script>
@@ -69,5 +104,9 @@ export default {
   height: 1px;
   background-color: #d8dee4;
   margin: 16px 0 18px 0;
+}
+.apply_user{
+  margin-top: 10px;
+  margin-bottom: 3px;
 }
 </style>

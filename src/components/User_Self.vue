@@ -23,6 +23,10 @@
                   <i class="iconfont">&#xeb66;</i>
                   <router-link to="/base/user_self/living_data">直播数据</router-link>
                 </li>
+                <li v-if="true">
+                  <i class="iconfont">&#xeb66;</i>
+                  <router-link to="/base/user_self/time_data">直播排班</router-link>
+                </li>
             </ul>
         </div>
         <div class="u_mainbody">
@@ -100,7 +104,7 @@ a{
 
 .user_head {
   margin-bottom: 20px;
-  border-bottom: 2px #ebebeb solid;
+  /* border-bottom: 2px #ebebeb solid; */
 }
 
 
@@ -121,8 +125,14 @@ a{
 .u_nav_ul li{
   margin-top:7px;
   margin-bottom: 7px;
-  background: #ff8f2b;
+  /* background: #ff8f2b; */
 }
+
+.u_nav_ul li a{
+  font-size: 22px;
+}
+
+
 
 .u_nav_ul li i{
   
@@ -138,7 +148,10 @@ a{
 }
 
 .u_mainbody{
-  width: 100%;
+  /* width: 100%; */
+
+    height: 742px;
+  width: 645px;
   padding-left: 10px;
   padding-top: 5px;
 }
