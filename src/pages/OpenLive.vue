@@ -106,16 +106,14 @@ export default {
                 });
         },
         openLive(){
-            this.request.post(
-                "/user/save",
-                this.perUser
+            this.request.get(
+                "/liveroom/getOld",
+                {
+                    params:this.user.id
+                }
             ).then(res => {
-                if(res.code == '200'){
-                    this.$message.success("保存成功")
-                    //更新浏览器存储的用户信息
-                    res.data.token=JSON.parse(sessionStorage.getItem("user")).token
-                    sessionStorage.setItem("user",JSON.stringify(res.data))
-                    this.$store.dispatch('getUserFromSession')
+                if(res.code === '200'){
+                    console.log(res.data);
                 }else{
                     this.$message.error("保存失败");
                 }
@@ -126,16 +124,14 @@ export default {
         },
         init(){
             this.request.get(
-                "/user/login"+this.user.id,
+                "/liveroom/getOld?"+this.user.id,
             ).then(res => {
-                if (res.code === '200') {
-                    this.$message.success("登录成功")
-                    sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
-                    this.$store.dispatch("getUserFromSession")
-                    this.$router.push("/")
-                } else
-                    this.$message.error(res.msg)
-            }).catch();
+                if(res.code === '200'){
+                    console.log(res.data);
+                }else{
+                    this.$message.error("保存失败");
+                }
+            })
         },
     },
     mounted() {

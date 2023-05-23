@@ -17,6 +17,10 @@
                     show-password
                     placeholder="请输入内容"
             ></el-input>
+            <div class="radio">
+                <el-radio v-model="user.radio" label="1">用户</el-radio>
+                <el-radio v-model="user.radio" label="2">主播</el-radio>
+            </div>
         </div>
         <div class="login_buttons">
             <el-button class="login_register" @click="login">登录</el-button>
@@ -32,33 +36,52 @@ export default {
             user: {
                 username: '',
                 password: '',
+                radio:'1',
             }
         };
     },
     methods: {
         login() {
-            if (this.account ==="" || this.password ==="") {
+            if (this.user.username ==="" || this.user.password ==="") {
                 this.$message({
                     showClose: true,
                     message: '请输入账号或密码',
                     type: 'error'
                 });
             } else {
-                this.request.post(
-                    "/user/login",
-                    this.user
-                ).then(res => {
-                    if (res.code === '200') {
-                        this.$notify({
-                            message: '登录成功',
-                            type: 'success'
-                        });
-                        sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
-                        this.$store.dispatch("getUserFromSession")
-                        this.$router.push("/")
-                    } else
-                        this.$message.error(res.msg)
-                }).catch();
+                if (this.user.radio==='1'){
+                    this.request.post(
+                        "/user/login",
+                        this.user
+                    ).then(res => {
+                        if (res.code === '200') {
+                            this.$notify({
+                                message: '登录成功',
+                                type: 'success'
+                            });
+                            sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
+                            this.$store.dispatch("getUserFromSession")
+                            this.$router.push("/")
+                        } else
+                            this.$message.error(res.msg)
+                    }).catch();
+                }else {
+                    this.request.post(
+                        "/anchor/login",
+                        this.user
+                    ).then(res => {
+                        if (res.code === '200') {
+                            this.$notify({
+                                message: '登录成功',
+                                type: 'success'
+                            });
+                            sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
+                            this.$store.dispatch("getUserFromSession")
+                            this.$router.push("/")
+                        } else
+                            this.$message.error(res.msg)
+                    }).catch();
+                }
             }
         }
     }
@@ -87,7 +110,6 @@ h2 {
     position: absolute;
     width: 100%;
     height: 100%;
-
     background-repeat: repeat-y;
     background-size: 100% 100%;
     background-attachment: fixed;
@@ -121,5 +143,9 @@ h2 {
 
 .Name_input {
     width: 70%;
+}
+.radio{
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 </style>

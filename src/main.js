@@ -40,6 +40,7 @@ import {
     Select,
     Link,
     Notification,
+    Radio,
 } from 'element-ui'
 
 //应用插件
@@ -74,7 +75,7 @@ Vue.component('el-upload', Upload)
 Vue.component('el-option', Option)
 Vue.component('el-select', Select)
 Vue.component('el-link', Link)
-
+Vue.component('el-radio', Radio)
 
 
 Vue.prototype.$confirm = MessageBox.confirm;
