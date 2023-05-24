@@ -22,10 +22,13 @@
               @click="refugeApply(scope.$index, scope.row)"
               >拒绝</el-button
             >
-            <span class="apply_state_agree" v-if='apply_state[scope.row]'>已同意</span>
-            <span class="apply_state_reguge" v-if='false'>已拒绝</span>
+            <span class="apply_state_agree" v-if="apply_state1[scope.$index]"
+              >已同意</span
+            >
+            <span class="apply_state_reguge" v-if="apply_state2[scope.$index]"
+              >已拒绝</span
+            >
           </template>
-          
         </el-table-column>
       </el-table>
     </div>
@@ -51,25 +54,23 @@ export default {
           apply_Over_Time: "2023-05-20 23:02:59",
         },
       ],
-      apply_state:[false,false]
+      apply_state1: [false],
+      apply_state2: [false],
     };
   },
   methods: {
     agreeApply(index, row) {
-      console.log(index, row);
-      this.modify_state(index)
+      this.apply_state1.splice(index, 1, true);
+      this.apply_state2.splice(index, 1, false);
     },
     refugeApply(index, row) {
-      console.log(index, row);
+      this.apply_state1.splice(index, 1, false);
+      this.apply_state2.splice(index, 1, true);
     },
-    modify_state(index){
-      
-      console.log(this.apply_state[index])
-      this.apply_state[index] = true
-      this.$set(this.apply_state,index,this.apply_state[index])
-      
-      
-    }
+
+  },
+  mounted: {
+    
   },
 };
 </script>
@@ -86,14 +87,13 @@ export default {
   margin: 16px 0 18px 0;
 }
 
-
-.apply_state_agree{
+.apply_state_agree {
   margin-left: 15px;
   color: green;
 }
 
-.apply_state_reguge{
-    margin-left: 15px;
+.apply_state_reguge {
+  margin-left: 15px;
   color: red;
 }
 </style>

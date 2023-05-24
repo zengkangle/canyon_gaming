@@ -1,4 +1,5 @@
 <template>
+
     <div class="login_outside">
         <div class="login_form">
             <h2>账号：</h2>
@@ -126,5 +127,12 @@ h2 {
 
 .Name_input {
     width: 70%;
+}
+
+
+.test{
+    width: 100px;
+    height: 100px;
+    background-color: brown;
 }
 </style>
