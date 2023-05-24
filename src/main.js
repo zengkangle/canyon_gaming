@@ -41,6 +41,7 @@ import {
     Link,
     Notification,
     Radio,
+    InputNumber,
 } from 'element-ui'
 
 //应用插件
@@ -71,11 +72,12 @@ Vue.component('el-dropdown-item', DropdownItem);
 Vue.component('el-table', Table);
 Vue.component('el-table-column', TableColumn);
 Vue.component('el-dialog', Dialog);
-Vue.component('el-upload', Upload)
-Vue.component('el-option', Option)
-Vue.component('el-select', Select)
-Vue.component('el-link', Link)
-Vue.component('el-radio', Radio)
+Vue.component('el-upload', Upload);
+Vue.component('el-option', Option);
+Vue.component('el-select', Select);
+Vue.component('el-link', Link);
+Vue.component('el-radio', Radio);
+Vue.component('el-input-number', InputNumber);
 
 
 Vue.prototype.$confirm = MessageBox.confirm;

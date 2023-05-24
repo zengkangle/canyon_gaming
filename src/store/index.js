@@ -20,9 +20,11 @@ const mutations = {
     GETUserFromSession(state, value) {
         if (JSON.parse(sessionStorage.getItem('user'))) {
             state.user = JSON.parse(sessionStorage.getItem('user'))
+            if (state.user.uid){
+                state.user.level=2;
+            }
         } else {
             state.user.avatarUrl = 'http://localhost:8008/files/download/8686ad58dcbe4e12a5ee6f7e38b46e69.png'
-            state.user.virtualCurrency = '3'
             state.user.username = ''
         }
     }

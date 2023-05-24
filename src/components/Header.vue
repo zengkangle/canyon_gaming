@@ -29,15 +29,15 @@
                             size="mini"
                     ></el-button>
                 </div>
-                <router-link class="right_item" to="/11">
+                <router-link class="right_item" to="/11" active-class="right-menu-active">
                     <i class="iconfont">&#xe755;</i>
                     <div>关注</div>
                 </router-link>
-                <router-link class="right_item" to="/base/open_live">
+                <router-link class="right_item" to="/base/open_live" active-class="right-menu-active" v-if="user.level===2">
                     <i class="iconfont">&#xe754;</i>
                     <div>开播</div>
                 </router-link>
-                <router-link class="right_item" to="/base/apply_streamer" v-if="user.level!==3">
+                <router-link class="right_item" to="/base/apply_streamer" active-class="right-menu-active" v-if="user.level!==2">
                     <i class="iconfont">&#xe754;</i>
                     <div>申请主播</div>
                 </router-link>
@@ -110,7 +110,9 @@ export default {
             this.$notify({
                 // title: '成功',
                 message: '退出成功',
-                type: 'success'
+                type: 'success',
+                offset: 50,
+                duration:1200,
             });
             this.$router.push("/");
         },
@@ -184,6 +186,10 @@ export default {
     border-radius: 2.666667rem 2.666667rem 2.666667rem 2.666667rem;
 }
 
+.right-menu-active{
+    color: #c3a340 !important;
+}
+
 .right {
     margin-right: 0;
     flex-grow: 3;
@@ -199,7 +205,7 @@ export default {
 .right_item {
     text-align: center;
     position: relative;
-    top: 7px;
+    top: 10px;
     color: white;
 }
 

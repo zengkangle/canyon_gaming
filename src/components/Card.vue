@@ -1,6 +1,11 @@
 <template>
     <div>
-        <div class="card">
+        <router-link :to="{
+            path:'/base/live',
+            query:{
+                roomId:item.roomId
+            }
+        }" class="card">
             <el-image :src="item.imgurl" fit="cover"></el-image>
             <div class="title">{{ item.roomname }}</div>
             <div class="footer">
@@ -14,7 +19,7 @@
                 </div>
                 <div class="hot-num">{{ item.degreeofeat }}</div>
             </div>
-        </div>
+        </router-link>
     </div>
 </template>
 
@@ -28,11 +33,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .card {
+    display: block;
     width: 331px;
     border: 1px solid white;
     border-radius: 3%;
     overflow: hidden;
     background-color: white;
+    color: black;
 }
 
 .title {

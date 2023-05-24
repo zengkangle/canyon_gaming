@@ -8,6 +8,7 @@
                     v-model="user.username"
                     clearable
                     placeholder="请输入内容"
+                    @keydown.enter.native="login"
             ></el-input>
             <h2>密码：</h2>
             <el-input
@@ -16,6 +17,7 @@
                     v-model="user.password"
                     show-password
                     placeholder="请输入内容"
+                    @keyup.enter.native="login"
             ></el-input>
             <div class="radio">
                 <el-radio v-model="user.radio" label="1">用户</el-radio>
@@ -42,6 +44,7 @@ export default {
     },
     methods: {
         login() {
+            console.log("1")
             if (this.user.username ==="" || this.user.password ==="") {
                 this.$message({
                     showClose: true,
@@ -57,7 +60,9 @@ export default {
                         if (res.code === '200') {
                             this.$notify({
                                 message: '登录成功',
-                                type: 'success'
+                                type: 'success',
+                                offset: 50,
+                                duration:1200,
                             });
                             sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
                             this.$store.dispatch("getUserFromSession")
@@ -73,7 +78,9 @@ export default {
                         if (res.code === '200') {
                             this.$notify({
                                 message: '登录成功',
-                                type: 'success'
+                                type: 'success',
+                                offset: 50,
+                                duration:1200,
                             });
                             sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
                             this.$store.dispatch("getUserFromSession")
