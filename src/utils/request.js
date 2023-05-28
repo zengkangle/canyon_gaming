@@ -14,7 +14,7 @@ request.interceptors.request.use(config => {
     let user = sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")) : null
     if(user){
         config.headers['token'] = user.token;  // 设置请求头
-        console.log(config.headers['token']);
+        
     }
     return config
 }, error => {

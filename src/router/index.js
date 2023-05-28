@@ -26,6 +26,7 @@ import enroll from "../components/enroll"
 
 //鱼吧路由
 import Fish from "../pages/Fish"
+import Notice from "../components/Notice"
 
 //用户中心
 import user_self from "../components/User_Self"
@@ -77,6 +78,12 @@ const router = new VueRouter({
                             meta: {title: 'Canyon游戏直播_云顶之弈'}
                         },
                     ]
+                },
+                //公告
+                {
+                    path:'Notice',
+                    component:Notice,
+                    meta:{title:'排版公告'}
                 },
                 {
                     path: 'live',

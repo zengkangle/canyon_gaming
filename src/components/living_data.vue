@@ -8,7 +8,7 @@
           />
           <span class="icon_state">直播热度</span>
         </span>
-        <span class="user_wallet_number">1030</span>
+        <span class="user_wallet_number">{{ user.popularity }}</span>
       </div>
 
       <div class="asset_empty"></div>
@@ -20,34 +20,48 @@
           />
           <span class="icon_state">直播次数</span>
         </span>
-        <span class="user_wallet_number">5</span>
+        <span class="user_wallet_number">{{ user.liveNum }}</span>
       </div>
     </div>
 
-    <div class="change_money">
-      
-    </div>
-
-
+    <div class="change_money"></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "living_data",
-  data: {
-    return: {},
+  data() {
+    return {
+      user: {
+      },
+    };
   },
-  methods: {},
+  methods: {
+    init() {
+      this.request
+        .get(
+          "/anchor/getAnchorByName?username=" + this.$store.state.user.username
+        )
+        .then((res) => {
+          if (res.code === "200") {
+            console.log(res.data);
+            this.user = res.data
+          } else this.$message.error(res.msg);
+        })
+        .catch();
+    },
+  },
+  mounted() {
+    this.init();
+  },
 };
 </script>
 
 <style>
-
-
-.living_data_outside{
-    width: 100%;
-    height: 100%;
+.living_data_outside {
+  width: 100%;
+  height: 100%;
 }
 
 .test {
@@ -56,65 +70,52 @@ export default {
   background-color: brown;
 }
 
-
-
-
-
-
-.asset_category{
-    display: flex;
-    margin-top: 13px;
+.asset_category {
+  display: flex;
+  margin-top: 13px;
 }
 
-
-.asset_category_item_left{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    text-align: center;
-    /* width: calc(50% - 2px); */
-    width:391px;
-    height: 82px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 4px;
-    margin-left: 2px;
-    margin-right: 10px;
+.asset_category_item_left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  text-align: center;
+  /* width: calc(50% - 2px); */
+  width: 391px;
+  height: 82px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  margin-left: 2px;
+  margin-right: 10px;
 }
 
-
-
-.asset_category_item_right{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    text-align: center;
-    /* width: calc(50% - 2px); */
-    width:391px;
-    height: 82px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 4px;
+.asset_category_item_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  text-align: center;
+  /* width: calc(50% - 2px); */
+  width: 391px;
+  height: 82px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 4px;
 }
 
-
-
-.icon_state{
-    font-size: 18px;
-    margin-left: 2px;
+.icon_state {
+  font-size: 18px;
+  margin-left: 2px;
 }
 
-
-.user_wallet_number{
-    font-size: 20px;
-    color: #ff5d23;
-    margin-top: 16px;
-    font-weight: 700;
+.user_wallet_number {
+  font-size: 20px;
+  color: #ff5d23;
+  margin-top: 16px;
+  font-weight: 700;
 }
-
-
 </style>

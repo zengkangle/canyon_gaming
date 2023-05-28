@@ -2,15 +2,16 @@
   <div>
     <div class="title">排班管理</div>
     <div class="divide">
-      <el-table :data="anchor_apply" border>
-        <el-table-column prop="room_Number" label="房间号" width="180">
+      <el-table :data="anchor_apply1" border>
+        <el-table-column prop="id" label="主播id" width="180">
         </el-table-column>
-        <el-table-column prop="anchor_Name" label="主播名称" width="180">
+        <el-table-column prop="username" label="主播名称" width="180">
         </el-table-column>
-        <el-table-column prop="apply_Start_Time" label="申请开播时间">
+        <el-table-column prop="startTime" label="原本开播时间">
         </el-table-column>
-        <el-table-column prop="apply_Over_Time" label="申请结束时间">
+        <el-table-column prop="stopTime" label="原本结束时间">
         </el-table-column>
+        <el-table-column prop="state" label="状态"> </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" @click="agreeApply(scope.$index, scope.row)"
@@ -40,20 +41,7 @@ export default {
   name: "AdminManageScheduling",
   data() {
     return {
-      anchor_apply: [
-        {
-          room_Number: "229",
-          anchor_Name: "皎月Carry",
-          apply_Start_Time: "2023-05-20 20:03:17",
-          apply_Over_Time: "2023-05-20 23:02:59",
-        },
-        {
-          room_Number: "229",
-          anchor_Name: "皎月Carry",
-          apply_Start_Time: "2023-05-20 20:03:17",
-          apply_Over_Time: "2023-05-20 23:02:59",
-        },
-      ],
+      anchor_apply1: [],
       apply_state1: [false],
       apply_state2: [false],
     };
@@ -64,13 +52,33 @@ export default {
       this.apply_state2.splice(index, 1, false);
     },
     refugeApply(index, row) {
+      //拒绝排班
       this.apply_state1.splice(index, 1, false);
       this.apply_state2.splice(index, 1, true);
+      console.log(row.id)
+      this.request
+        .get("/worktime/refuseReApply?id="+row.id)
+        .then((res) => {
+          if (res.code === "200") {
+            
+            console.log(res.data);
+          } else this.$message.error(res.msg);
+        })
+        .catch();
     },
-
+    init() {
+      this.request
+        .get("/worktime/showApply")
+        .then((res) => {
+          if (res.code === "200") {
+            this.anchor_apply1 = res.data;
+          } else this.$message.error(res.msg);
+        })
+        .catch();
+    },
   },
-  mounted: {
-    
+  mounted() {
+    this.init();
   },
 };
 </script>

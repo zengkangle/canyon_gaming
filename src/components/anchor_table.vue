@@ -40,18 +40,24 @@ export default {
     },
     apply_cancel(index, row) {
       console.log(row.id);
-      this.request.get("/worktime/applyReTime", row.id)
-      .then((res) => {
+      this.request
+        .get("/worktime/applyReTime" + "?" + "id=" + row.id)
+        .then((res) => {
           if (res.code === "200") {
-            console.log('申请成功')
+            this.$notify({
+              title: "申请成功",
+              message: "请等待审核员审核",
+              type: "success",
+            });
           } else this.$message.error(res.msg);
         })
-      .catch();
+        .catch();
     },
   },
   mounted() {
     this.init();
   },
+
 };
 </script>
 

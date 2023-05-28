@@ -64,50 +64,99 @@
           </div>
         </div>
 
-        <div class="wb_card-wbCardWrap">
-          <div class="wb_card-wbCardDetail">
-            <div class="wb_card-wbFace">
-              <img
-                class="img-head"
-                src="https://apic.douyucdn.cn/upload/avatar_v3/201903/3dcec943761543ada419b5c845ebe04a_middle.jpg"
-              />
-            </div>
-            <div class="wb_card-wbDetail_content">
-              <div class="wb_card-wbInfo">
-                <span class="user-name">阿涛皎月Carry</span>
+        <div class="big_wb_card-wbCardWrap" v-for="(item, index) in Msg">
+          <div class="wb_card-wbCardWrap">
+            <div class="wb_card-wbCardDetail">
+              <div class="wb_card-wbFace">
+                <img
+                  class="img-head"
+                  src="https://apic.douyucdn.cn/upload/avatar_v3/201903/3dcec943761543ada419b5c845ebe04a_middle.jpg"
+                />
               </div>
-              <div class="wb_card-wbFrom_time">
-                <span class="push-info">2023-04-13 16:16</span>
-              </div>
-              <div class="wb_card-wbFrom_content">
-                <p>asd</p>
-                <p>兄弟们寄了</p>
+              <div class="wb_card-wbDetail_content">
+                <div class="wb_card-wbInfo">
+                  <span class="user-name">{{ item.username }}</span>
+                </div>
+                <div class="wb_card-wbFrom_time">
+                  <span class="push-info">{{ item.time }}</span>
+                </div>
+                <div class="wb_card-wbFrom_content">
+                  <p>{{ item.comment }}</p>
+                </div>
               </div>
             </div>
           </div>
+          <div class="wb_footer">
+            <ul>
+              <li>
+                <i class="iconfont" @click="show_comment(item, index)"
+                  >&#xe603;</i
+                >
+              </li>
+              <li>
+                <i class="iconfont">&#xe63d;</i>
+              </li>
+              <li>
+                <i class="iconfont">&#xeca7;</i>
+              </li>
+              <li>
+                <i class="iconfont">&#xec7f;</i>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="wb_footer">
-          <ul>
-            <li>
-              <i class="iconfont" @click="show_comment">&#xe603;</i>
-            </li>
-            <li>
-              <i class="iconfont">&#xe63d;</i>
-            </li>
-            <li>
-              <i class="iconfont">&#xeca7;</i>
-            </li>
-            <li>
-              <i class="iconfont">&#xec7f;</i>
-            </li>
-          </ul>
-        </div>
+
+        <el-dialog
+          @open="opendialog()"
+          @close="closedialog()"
+          title="评论"
+          :visible.sync="dialogVisible"
+          width="28%"
+          :before-close="handleClose"
+          class="dialog_main_body"
+        >
+          <div class="common-editorTextWrapper">
+            <div class="user_head_img">
+              <img class="head_img" :src="user.avatarUrl" />
+            </div>
+            <div class="text_areas">
+              <el-input
+                class="mytextarea"
+                type="textarea"
+                placeholder="请输入内容"
+                v-model="textarea_comment"
+                resize="none"
+              >
+              </el-input>
+            </div>
+          </div>
+          <div class="dialog_empty">
+            <div class="dialog_button">
+              <el-button type="success" @click="release_comment"
+                >发表</el-button
+              >
+            </div>
+          </div>
+          <div class="rap"></div>
+
+          <div class="root_comment" v-for="(item, index) in childrenMsgList">
+            <div class="root_img">
+              <img :src="item.avatarUrl" />
+            </div>
+            <div class="main-right">
+              <div class="user_name">
+                <span>{{ item.username }}</span>
+              </div>
+              <div class="user_content">{{ item.comment }}</div>
+            </div>
+          </div>
+        </el-dialog>
       </div>
       <div class="main-right">
         <div class="user_card">
           <div class="user_card-userFace">
             <img
-              src="https://apic.douyucdn.cn/upload/avatar_v3/201902/e0d05413f49f4319910a51c6e17f099a_middle.jpg"
+              :src="user.avatarUrl"
               class="user_card-userImg"
               style="
                 border-radius: 50%;
@@ -117,7 +166,7 @@
               "
             />
             <div class="user_card-userName">
-              <span>KAone</span>
+              <span>{{ user.username }}</span>
             </div>
           </div>
           <div class="user_card-userInfoWrap">
@@ -127,7 +176,7 @@
                 <span>关注</span>
               </li>
               <li>
-                <strong>999</strong>
+                <strong>{{fans}}</strong>
                 <span>粉丝</span>
               </li>
               <li>
@@ -165,61 +214,13 @@
         </div>
       </div>
     </div>
-
-    <el-dialog
-      title="评论"
-      :visible.sync="dialogVisible"
-      width="28%"
-      :before-close="handleClose"
-      class="dialog_main_body"
-    >
-      <div class="common-editorTextWrapper">
-        <div class="user_head_img">
-          <img
-            class="head_img"
-            src="https://apic.douyucdn.cn/upload/avatar_v3/201903/3dcec943761543ada419b5c845ebe04a_middle.jpg"
-          />
-        </div>
-        <div class="text_areas">
-          <el-input
-            class="mytextarea"
-            type="textarea"
-            placeholder="请输入内容"
-            v-model="textarea_comment"
-            resize="none"        
-          >
-          </el-input>
-        </div>
-        
-      </div>
-      <div class="dialog_empty">
-        <div class="dialog_button">
-          <el-button type="success" @click="release">发表</el-button>
-      </div>
-      </div>
-
-      <div class="rap"></div>
-      
-      <div class="root_comment">
-        <div class="root_img">
-          <img
-            src="https://apic.douyucdn.cn/upload/avatar_v3/201812/df4ca4c191024460b8f4b662451e4189_big.jpg"
-          />
-        </div>
-        <div class="main-right">
-          <div class="user_name">
-            <span>KAone</span>
-          </div>
-          <div class="user_content">我觉得很有前途</div>
-        </div>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 
 
 <script>
+import { time } from "echarts";
 export default {
   name: "Fish",
 
@@ -227,17 +228,141 @@ export default {
     return {
       textarea: "",
       dialogVisible: false,
-      textarea_comment:'',
-      post: [],
+
+      Msg: [],
+      childrenMsgList: [],
+      user: {},
+      article: {
+        comment: "",
+        username: "",
+        avatarUrl: "",
+      },
+      //打开dialog所需要的数据
+      textarea_comment: "",
+      //评论所需要的数据
+      dialog_comment: {
+        comment: "",
+
+        //打开的是哪个帖子的评论
+        pid: "",
+        //回复的对象
+        target: "",
+        //评论的人
+        avatarUrl: "",
+        username: "",
+      },
+      fans:0,
+      anchorList:[]
     };
   },
   methods: {
-    release() {
-      // 将输入的内容推送到页面
-    },
-    show_comment() {
+    show_comment(item, index) {
+      if (
+        typeof item.childrenMsgList === "object" &&
+        item.childrenMsgList !== null
+      ) {
+        console.log(index);
+        this.childrenMsgList = item.childrenMsgList;
+      } else {
+        this.childrenMsgList = [];
+      }
+      (this.dialog_comment.pid = item.id),
+        (this.dialog_comment.target = item.username);
+      this.dialog_comment.username = this.user.username;
+      this.dialog_comment.avatarUrl = this.user.avatarUrl;
       this.dialogVisible = true;
     },
+    init() {
+      this.user = this.$store.state.user;
+      this.request
+        .get("/msg/findAllMsg")
+        .then((res) => {
+          if (res.code === "200") {
+            this.Msg = res.data;
+          } else this.$message.error(res.msg);
+        })
+        .catch();
+
+
+
+
+      this.request
+        .get("/anchor/getsix")
+        .then((res) => {
+          if (res.code === "200") {
+            this.anchorList = res.data;
+            console.log(this.anchorList)
+          } else this.$message.error(res.msg);
+        })
+        .catch();  
+    },
+    release() {
+      if (this.textarea == "") {
+        this.$notify({
+          title: "错误",
+          message: "请输入内容",
+          type: "warning",
+        });
+        return;
+      }
+      (this.article.comment = this.textarea),
+        (this.article.username = this.user.username),
+        (this.article.avatarUrl = this.user.avatarUrl);
+      this.request
+        .post("/msg/saveComment", this.article)
+        .then((res) => {
+          if (res.code === "200") {
+            console.log("发布帖子" + res.data);
+            this.article.comment = "";
+          } else this.$message.error(res.msg);
+        })
+        .catch();
+    },
+    opendialog() {
+      // console.log(this.childrenMsgList);
+    },
+    closedialog() {
+      console.log("关闭回调");
+    },
+    release_comment() {
+      if (this.textarea_comment == "") {
+        this.$notify({
+          title: "错误",
+          message: "请输入内容",
+          type: "warning",
+        });
+        return;
+      }
+      this.dialog_comment.comment = this.textarea_comment;
+      this.request
+        .post("/msg/saveComment", this.dialog_comment)
+        .then((res) => {
+          if (res.code === "200") {
+            this.textarea_comment = "";
+          } else this.$message.error(res.msg);
+        })
+        .catch();
+    },
+    //如果登录的是主播 有粉丝
+    init_fans() {
+      this.request
+        .get(
+          "/anchor/getAnchorByName?username=" + this.$store.state.user.username
+        )
+        .then((res) => {
+          if (res.code === "200") {
+            this.fans =  res.data.fans
+          } else this.$message.error(res.msg);
+        })
+        .catch();
+
+    },
+  },
+  mounted() {
+    this.init();
+    if (this.$store.state.user.level == 2) {
+      this.init_fans();
+    }
   },
 };
 </script>
@@ -273,6 +398,7 @@ export default {
 .fish-all {
   margin-left: 200px;
   width: 1020px;
+  /* height: 2000px; */
   margin: 0 auto;
   padding-top: 80px;
 }
@@ -446,15 +572,13 @@ li:last-child {
   border-top: 1px solid black;
 }
 
-
-.user_card-userInfoWrap span{
+.user_card-userInfoWrap span {
   font-size: 15px;
 }
 
-.user_card-userInfoWrap strong{
+.user_card-userInfoWrap strong {
   font-size: 16px;
 }
-
 
 .user_card-userAtten {
   display: flex;
@@ -554,18 +678,16 @@ li:last-child {
   font-size: 17px;
 }
 
-.user_head_img{
+.user_head_img {
   display: inline-block;
   margin-left: 4px;
   margin-right: 4px;
-
 }
 
 .common-editorTextWrapper {
   display: flex;
   margin-bottom: 10px;
 }
-
 
 .head_img {
   border-radius: 50%;
@@ -574,24 +696,23 @@ li:last-child {
   height: 60px;
 }
 
-.text_areas{
+.text_areas {
   width: 390px;
-  
 }
 
-.mytextarea{
+.mytextarea {
   height: 65px;
 }
 
-.dialog_empty{
+.dialog_empty {
   display: flex;
 }
 
-.dialog_button{
+.dialog_button {
   margin-left: 390px;
 }
 
-.rap{
+.rap {
   height: 20px;
 }
 </style>
