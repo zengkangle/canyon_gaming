@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">排班管理</div>
-    <div class="divide">
+    <div class="divide"></div>
       <el-table :data="anchor_apply1" border>
         <el-table-column prop="id" label="主播id" width="180">
         </el-table-column>
@@ -32,7 +32,6 @@
           </template>
         </el-table-column>
       </el-table>
-    </div>
   </div>
 </template>
 
@@ -86,13 +85,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .title {
-  font-size: 24px;
+    font-size: 24px;
 }
+
 .divide {
-  width: 100%;
-  /* height: 100px; */
-  background-color: #d8dee4;
-  margin: 16px 0 18px 0;
+    width: 100%;
+    height: 1px;
+    background-color: #d8dee4;
+    margin: 16px 0 18px 0;
 }
 
 .apply_state_agree {

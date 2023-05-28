@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     init() {
-      if (this.$store.state.user.level == 2) {
+      if (this.$store.state.user.level === 2) {
         this.request
           .get(
             "/anchor/getAnchorByName?username=" +

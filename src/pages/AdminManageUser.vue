@@ -81,7 +81,7 @@
                     <el-input v-model="row.email"></el-input>
                 </el-form-item>
                 <el-form-item label="用户等级" >
-                    <el-select v-model="row.level" filterable placeholder="请选择" disabled="true">
+                    <el-select v-model="row.level" filterable placeholder="请选择" :disabled=true >
                         <el-option
                                 v-for="item in options"
                                 :key="item.value"
@@ -169,6 +169,7 @@ export default {
             this.row.level = row.level;
             this.row.virtualCurrency = row.virtualCurrency;
             this.row.id = row.id;
+            this.row.password = row.password;
         },
         handleDelete(index, row) {
             console.log(index, row);
@@ -186,6 +187,7 @@ export default {
                             }
                         }
                     ).then(res => {
+                        console.log(res)
                         if (res.code === '200') {
                             this.$notify({
                                 message: res.msg,
@@ -195,8 +197,9 @@ export default {
                             });
                             this.dialogVisible = false;
                             this.change();
-                        } else
+                        } else{
                             this.$message.error(res.msg)
+                        }
                     }).catch();
                 })
                 .catch(() => {

@@ -167,8 +167,7 @@ export default {
         });
     },
     delete_anchor(index, row) {
-      this.request
-        .get("/anchor/deleteAnchorByUid?uid=" + row.uid)
+      this.request.get("/anchor/deleteAnchorByUid?uid=" + row.uid)
         .then((res) => {
           if (res.code === "200") {
             this.$notify({
