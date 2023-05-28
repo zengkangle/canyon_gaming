@@ -10,19 +10,21 @@
             </div>
             <div class="middle">
                 <div class="middle_header">
-                    <div class="middle_header_title">{{ liveRoomMsg.roomname | roomname(liveRoomMsg.username,liveRoomMsg.degreeofeat)}}</div>
+                    <div class="middle_header_title">
+                        {{ liveRoomMsg.roomname | roomname(liveRoomMsg.username,liveRoomMsg.degreeofeat) }}
+                    </div>
                     <div class="subtitle jubao">举报</div>
                     <div class="subtitle">网络竞技</div>
                     <i class="el-icon-caret-right subtitle"></i>
                     <div class="subtitle">英雄联盟</div>
                     <i class="el-icon-caret-right subtitle"></i>
-                    <div class="subtitle" >{{ liveRoomMsg.theme | theme}}</div>
+                    <div class="subtitle">{{ liveRoomMsg.theme | theme }}</div>
                 </div>
                 <div class="desc">
                     <img src="../assets/live1.png" alt="" class="my-margin"/>
-                    <div class="desc1 descitem my-margin">房间号：{{liveRoomMsg.roomId}}</div>
+                    <div class="desc1 descitem my-margin">房间号：{{ liveRoomMsg.roomId }}</div>
                     <i class="iconfont descitem fire my-ico">&#xff20;</i>
-                    <div class="descitem my-color my-margin">{{liveRoomMsg.degreeofeat}}</div>
+                    <div class="descitem my-color my-margin">{{ liveRoomMsg.degreeofeat }}</div>
                     <div class="descitem first my-margin">峡谷第一召唤师</div>
                     <i class="iconfont descitem my-color my-ico">&#xff23;</i>
                     <div class="descitem my-color my-margin">8友邻</div>
@@ -35,11 +37,27 @@
             </div>
             <div class="right">
                 <div class="guanzhu">
-                    <div class="guanzhu-num">{{liveRoomMsg.fans}}</div>
-                    <div class="guanzhu-title">
-                        <i class="iconfont aixin">&#xff24;</i>
-                        <div>关注</div>
-                    </div>
+                    <template v-if="liveRoomMsg.isgz">
+                        <div class="guanzhu-num">{{ liveRoomMsg.fans }}</div>
+                        <div class="guanzhu-title" @click="guanzhu">
+                            <i class="iconfont aixin">&#xff24;</i>
+                            <div>关注</div>
+                        </div>
+                    </template>
+                    <template v-if="liveRoomMsg.isgz">
+                        <div class="guanzhu-num2">{{ liveRoomMsg.fans }}</div>
+                        <div class="guanzhu-title2">
+                            <el-dropdown class="have_login">
+                                <span class="el-dropdown-link">
+                                    已关注
+                                    <i class="el-icon-arrow-down el-icon--right"></i>
+                                </span>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item @click="quguan">取消关注</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                        </div>
+                    </template>
                 </div>
                 <div class="right_bottom">
                     <img src="../assets/live3.png" alt="" class="huojian"/>
@@ -69,13 +87,16 @@
 
 <script>
 import flvjs from "flv.js";
-
+import {mapState} from 'vuex';
 export default {
     data() {
         return {
             liveRoomMsg: {},
-            flvPlayer:'',
+            flvPlayer: '',
         };
+    },
+    computed: {
+        ...mapState(['user'])
     },
     methods: {
         init() {
@@ -84,12 +105,13 @@ export default {
                 {
                     params: {
                         roomId: this.$route.query.roomId,
+                        uid: this.user.uid,
                     }
                 }
             ).then(res => {
                 console.log(res);
                 this.liveRoomMsg = res.data;
-                if (this.liveRoomMsg.degreeofeat!==0){
+                if (this.liveRoomMsg.degreeofeat !== 0) {
                     this.$nextTick(() => {
                         this.createVideo();
                     });
@@ -109,19 +131,58 @@ export default {
                 this.flvPlayer.play();
             }
         },
+        guanzhu(){
+            this.request.get(
+                "/follow/followAnchor",
+                {
+                    params: {
+                        uid: this.user.uid,
+                        aid: this.liveRoomMsg.aid,
+                    }
+                }
+            ).then(res => {
+                console.log(res);
+                this.init();
+                this.$notify({
+                    message: res.msg,
+                    type: 'success',
+                    offset: 50,
+                    duration:1200,
+                });
+            }).catch();
+        },
+        quguan(){
+            this.request.get(
+                "/follow/cancelFollowAnchor",
+                {
+                    params: {
+                        uid: this.user.uid,
+                        aid: this.liveRoomMsg.aid,
+                    }
+                }
+            ).then(res => {
+                console.log(res);
+                this.$notify({
+                    message: res.msg,
+                    type: 'success',
+                    offset: 50,
+                    duration:1200,
+                });
+            }).catch();
+        }
     },
     filters: {
-        roomname(value,username,degreeofeat) {
-            if (value === null||degreeofeat===0) {
+        roomname(value, username, degreeofeat) {
+            if (value === null || degreeofeat === 0) {
                 return '主播' + username + ':正在赶来的路上！';
-            }else {
+            } else {
                 return value;
             }
         },
-        theme(value){
-            if (value === "NULL"){
+        theme(value) {
+            if (value === "NULL") {
                 return '其它'
-            }else {
+            } else {
                 return value;
             }
         },
@@ -286,8 +347,27 @@ video {
     cursor: pointer;
 }
 
+.guanzhu-title2 {
+    display: flex;
+    background-color: #CCCCCC;
+    padding: 5px 22px;
+    color: #fff;
+    border-radius: 2.666667rem 2.666667rem 2.666667rem 2.666667rem;
+    font-size: 14px;
+    z-index: 99;
+    cursor: pointer;
+}
+
 .guanzhu-num {
     background-color: #fff0e2;
+    border-radius: 2.666667rem 0 0 2.666667rem;
+    padding: 6px 25px 0 30px;
+    position: relative;
+    left: 20px;
+}
+
+.guanzhu-num2 {
+    background-color: #F2F2F2;
     border-radius: 2.666667rem 0 0 2.666667rem;
     padding: 6px 25px 0 30px;
     position: relative;
@@ -312,14 +392,20 @@ video {
     margin-top: -4px;
     margin-right: 5px;
 }
-.noLive{
+
+.noLive {
     height: 633px;
     width: 1400px;
-    background-image: radial-gradient(farthest-side,#3D3D3D, #262626);
+    background-image: radial-gradient(farthest-side, #3D3D3D, #262626);
 }
-.noLive-title{
+
+.noLive-title {
     color: #fff;
     text-align: center;
     line-height: 633px;
+}
+
+.el-dropdown-link {
+    color: #fff;
 }
 </style>

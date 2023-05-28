@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">消息管理</div>
-    <div class="divide">
+    <div class="divide"></div>
       <div class="time_detail">
         <h2 class="send_h2">发布排班</h2>
         <div class="block">
@@ -16,16 +16,15 @@
           >
           </el-date-picker>
           <div class="time_send">
-            <el-button type="success" plain class="send_time" @click="send_time"
+            <el-button type="primary" plain class="send_time" @click="send_time"
               >提交</el-button
             >
           </div>
         </div>
       </div>
 
-      <dic class="notice_detail"> </dic>
+      <div class="notice_detail"> </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -70,14 +69,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .title {
-  font-size: 24px;
+    font-size: 24px;
 }
+
 .divide {
-  height: 400px;
-  width: 100%;
-  height: 1px;
-  background-color: #d8dee4;
-  margin: 16px 0 18px 0;
+    width: 100%;
+    height: 1px;
+    background-color: #d8dee4;
+    margin: 16px 0 18px 0;
 }
 
 .time_detail {

@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     init() {
-      if (this.$store.state.user.level == 2) {
+      if (this.$store.state.user.level === 2) {
         this.request
           .get(
             "/anchor/getAnchorByName?username=" +
@@ -64,7 +64,7 @@ export default {
           .then((res) => {
             if (res.code === "200") {
               this.user = res.data;
-              this.money = parseInt(this.user.virtualUrrency) * 2;
+              this.money = parseInt(this.user.virtualUrrency) / 2;
             } else this.$message.error(res.msg);
           })
           .catch();

@@ -2,7 +2,7 @@
     <div class="home">
         <Swiper/>
         <LiveListHeader/>
-        <router-view></router-view>
+        <router-view class="show"></router-view>
     </div>
 </template>
 
@@ -27,5 +27,8 @@ export default {
     margin: 0 auto;
     padding-top: 80px;
     background-color: #e5e7eb;
+}
+.show{
+    height: 850px;
 }
 </style>

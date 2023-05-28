@@ -51,7 +51,7 @@
                     <template v-if="!user.username">
                         <div class="welcome">
                             亲爱的召唤师，欢迎
-                            <router-link to="/Canyon_Gaming_Starter">登录</router-link>
+                            <router-link to="/Canyon_Gaming_Starter/login">登录</router-link>
                         </div>
                     </template>
                     <template v-if="user.username">
@@ -107,7 +107,6 @@ export default {
             sessionStorage.removeItem("user");
             this.$store.dispatch("getUserFromSession");
             this.$notify({
-                // title: '成功',
                 message: '退出成功',
                 type: 'success',
                 offset: 50,
