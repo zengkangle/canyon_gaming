@@ -64,14 +64,14 @@ export default {
           .then((res) => {
             if (res.code === "200") {
               this.user = res.data;
-              this.money = parseInt(this.user.virtualUrrency) * 2;
+              this.money = parseInt(this.user.virtualUrrency) / 2;
             } else this.$message.error(res.msg);
           })
           .catch();
       } else {
         this.user = this.$store.state.user;
         this.user.virtualUrrency = this.$store.state.user.virtualCurrency;
-        this.money = parseInt(this.user.virtualUrrency) * 2;
+        this.money = parseInt(this.user.virtualUrrency) / 2;
       }
     },
     cash() {
