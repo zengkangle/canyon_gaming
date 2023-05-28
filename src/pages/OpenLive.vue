@@ -2,9 +2,9 @@
     <div class="open_live">
         <div class="title">开播</div>
         <div class="divide"></div>
-        <el-form :model="perUser" :rules="rules" ref="perForm" label-width="90px" label-position="top"
+        <el-form :model="liveMsg" :rules="rules" ref="liveMsg" label-width="90px" label-position="top"
                  class="live_form">
-            <el-form-item label="房间封面：">
+            <el-form-item label="房间封面上传：" v-if="liveMsg.degreeofeat===0">
                 <el-upload
                         class="avatar-uploader a"
                         action="http://localhost:8008/files/upload"
@@ -17,64 +17,67 @@
                     <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                 </el-upload>
             </el-form-item>
-            <el-form-item label="封面展示效果：" v-if="perUser.roomImage">
+            <el-form-item label="当前直播间封面：" v-if="liveMsg.roomImage">
                 <el-image
                         style="width: 338px; height: 190px"
-                        :src="perUser.roomImage"
+                        :src="liveMsg.roomImage"
                         fit="contain">
                 </el-image>
             </el-form-item>
             <el-form-item label="房间标题：" prop="title" for="title">
-                <el-input id="title" v-model="perUser.title" maxlength="20" show-word-limit></el-input>
+                <el-input id="title" v-model="liveMsg.title" maxlength="20" show-word-limit :disabled="liveMsg.degreeofeat!==0"></el-input>
             </el-form-item>
             <el-form-item label="直播主题：" for="theme">
-                <el-select v-model="perUser.gender" placeholder="请选择" id="gender" style="width:100%">
-                    <el-option v-for="item in initTheme" :key="item.id" :label="item.themeName"
-                               :value="item.id"></el-option>
+                <el-select v-model="liveMsg.theme" placeholder="请选择" id="gender" style="width:100%" filterable :disabled="liveMsg.degreeofeat!==0">
+                    <el-option v-for="item in initTheme" :key="item.id" :label="item.theme"
+                               :value="item.theme" ></el-option>
                 </el-select>
             </el-form-item>
-            <template v-if="perUser.code">
+            <template v-if="liveMsg.degreeofeat!==0">
                 <el-form-item label="服务器地址：" class="live_code">
                     <div class="live_code">
                         <el-input
-                            :placeholder="serverAddress"
-                            v-model="serverAddress"
-                            :disabled="true">
+                                :placeholder="openCode.serverAddress"
+                                v-model="openCode.serverAddress"
+                                :disabled="true">
                         </el-input>
-                        <el-link :underline="false" class="fuzhi" @click="copy(serverAddress)">复制</el-link>
+                        <el-link :underline="false" class="fuzhi" @click="copy(openCode.serverAddress)">复制</el-link>
                     </div>
                 </el-form-item>
                 <el-form-item label="推流码：" class="live_code">
                     <div class="live_code">
                         <el-input
-                            :placeholder="perUser.code"
-                            v-model="perUser.code"
-                            :disabled="true">
+                                :placeholder="openCode.code"
+                                v-model="openCode.code"
+                                :disabled="true">
                         </el-input>
-                        <el-link :underline="false" class="fuzhi" @click="copy(perUser.code)">复制</el-link>
+                        <el-link :underline="false" class="fuzhi" @click="copy(openCode.code)">复制</el-link>
                     </div>
                 </el-form-item>
             </template>
-            <el-button type="primary" v-if="!perUser.code" @click="openLive">开始直播</el-button>
-            <el-button type="danger" v-if="perUser.code" @click="closeLive">关闭直播</el-button>
+            <el-button type="primary" v-if="liveMsg.degreeofeat===0" @click="openLive">开始直播</el-button>
+            <el-button type="danger" v-if="liveMsg.degreeofeat!==0" @click="closeLive">关闭直播</el-button>
         </el-form>
     </div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
+
 export default {
     name: 'OpenLive',
     data() {
         return {
-            initTheme: [{id: '1', themeName: 'lol'}, {id: '2', themeName: 'aaa'}, {id: '3', themeName: 'bbb'}],
-            serverAddress: 'rtmp://192.168.159.130:1935/live',
-            perUser: {
+            initTheme: [],
+            openCode: {
+                serverAddress: '',
+                code: '',
+            },
+            liveMsg: {
                 roomImage: '',
                 title: '',
-                userName: '',
                 theme: '',
-                code:'1',
+                degreeofeat: 0,
             },
             rules: {
                 title: [
@@ -88,9 +91,7 @@ export default {
     },
     methods: {
         handleAvatarSuccess(res, file) {
-            console.log(file)
-            this.perUser.roomImage = file.response.data;
-            console.log(this.perUser)
+            this.liveMsg.roomImage = file.response.data;
         },
         beforeAvatarUpload(file) {
             const isLt2M = file.size / 1024 / 1024 < 2;
@@ -105,37 +106,68 @@ export default {
                     this.$message.success('复制成功');
                 });
         },
-        openLive(){
-            this.request.post(
-                "/user/save",
-                this.perUser
+        openLive() {
+            this.request.get(
+                "/liveroom/open",
+                {
+                    params: {
+                        id: this.user.id,
+                        roomname: this.liveMsg.title,
+                        theme: this.liveMsg.theme,
+                        imgurl: this.liveMsg.roomImage,
+                    }
+                }
             ).then(res => {
-                if(res.code == '200'){
-                    this.$message.success("保存成功")
-                    //更新浏览器存储的用户信息
-                    res.data.token=JSON.parse(sessionStorage.getItem("user")).token
-                    sessionStorage.setItem("user",JSON.stringify(res.data))
-                    this.$store.dispatch('getUserFromSession')
-                }else{
-                    this.$message.error("保存失败");
+                if (res.code === '200') {
+                    console.log(res.data);
+                    this.init();
+                    this.$notify({
+                        message: '成功开播！',
+                        type: 'success'
+                    });
+                } else {
+                    this.$message.error(res.data);
                 }
             })
         },
-        closeLive(){
-
-        },
-        init(){
+        closeLive() {
             this.request.get(
-                "/user/login"+this.user.id,
+                "/liveroom/over",
+                {
+                    params: {
+                        id: this.user.id,
+                    }
+                }
             ).then(res => {
                 if (res.code === '200') {
-                    this.$message.success("登录成功")
-                    sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
-                    this.$store.dispatch("getUserFromSession")
-                    this.$router.push("/")
-                } else
-                    this.$message.error(res.msg)
-            }).catch();
+                    this.init();
+                    this.$notify({
+                        message: res.data,
+                        type: 'success'
+                    });
+                } else {
+                    this.$message.error("下播失败");
+                }
+            })
+        },
+        init() {
+            this.request.get(
+                "/liveroom/getOld",
+                {
+                    params: {
+                        id: this.user.id
+                    }
+                }
+            ).then(res => {
+                console.log(res.data);
+                this.initTheme = res.data.themes;
+                this.liveMsg.theme=res.data.theme;
+                this.liveMsg.roomImage = res.data.imgurl;
+                this.liveMsg.title = res.data.roomname;
+                this.liveMsg.degreeofeat = res.data.degreeofeat;
+                this.openCode.code=res.data.code;
+                this.openCode.serverAddress=res.data.serverAddress;
+            })
         },
     },
     mounted() {
@@ -156,8 +188,8 @@ export default {
     background-color: #d8dee4;
     margin: 16px 0 18px 0;
 }
+
 .open_live {
-    //height: 900px;
     width: 1200px;
     margin: 0 auto;
     padding-top: 80px;

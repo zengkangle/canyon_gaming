@@ -25,7 +25,28 @@ export default {
     data() {
         return {
             property: "value",
+            opt1:[],
         };
+    },
+    methods: {
+        init(option1,option2,myChart,myChart2) {
+            this.request.get(
+                "/theme/getTheme",
+            ).then(res => {
+                console.log(res);
+                option1.series[0].data = res.data;
+                myChart.setOption(option1);
+            }).catch();
+            this.request.get(
+                "/anchor/getsix",
+            ).then(res => {
+                console.log(res);
+                option2.yAxis.data = res.data.name;
+                option2.series[0].data = res.data.popularity;
+                option2.series[1].data = res.data.fans;
+                myChart2.setOption(option2);
+            }).catch();
+        }
     },
     mounted() {
         //初始化
@@ -52,13 +73,7 @@ export default {
                     itemStyle: {
                         borderRadius: 8,
                     },
-                    data: [
-                        {value: 40, name: "rose 1"},
-                        {value: 38, name: "rose 2"},
-                        {value: 32, name: "rose 3"},
-                        {value: 30, name: "rose 4"},
-                        {value: 28, name: "rose 5"},
-                    ],
+                    data:[],
                 },
             ],
         };
@@ -100,6 +115,7 @@ export default {
                 },
             ],
         };
+        this.init(option1,option2,myChart,myChart2);
         myChart.setOption(option1);
         myChart2.setOption(option2);
     },
