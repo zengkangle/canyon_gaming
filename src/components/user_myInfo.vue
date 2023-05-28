@@ -6,18 +6,34 @@
     <div class="myprofile_maing">
       <div class="userinfo_clearfix">
         <div class="user_img">
-          <img
-            src="https://apic.douyucdn.cn/upload/avatar_v3/201902/e0d05413f49f4319910a51c6e17f099a_big.jpg?rltime"
-          />
+          <img :src="user.avatarUrl" />
         </div>
       </div>
       <div class="fl_udetail_info">
-        <div class="user_name"><span>KAone</span></div>
-        <div class="user_phone">
-          <span>手机号：123123123</span>
+        <div class="user_name">
+          <span
+            >用户名：<span class="user_name_span">{{
+              user.username
+            }}</span></span
+          >
         </div>
-        <div class="user_email"><span>邮箱：1323123@qq.com</span></div>
-        <div class="user_wealthy"><span>精粹：12312312</span></div>
+        <div class="user_phone">
+          <span
+            >手机号：<span class="user_phone_span">{{ user.phone }}</span></span
+          >
+        </div>
+        <div class="user_email">
+          <span
+            >邮箱：<span class="user_email_span">{{ user.email }}</span></span
+          >
+        </div>
+        <div class="user_wealthy">
+          <span
+            >精粹：<span class="user_wealthy_span">{{
+              user.virtualUrrency
+            }}</span></span
+          >
+        </div>
       </div>
     </div>
     <div class="account_setting">
@@ -30,7 +46,7 @@
             </div>
 
             <div class="user_check_message_phone">
-              <span>手机号：123123123</span>
+              <span>手机号：{{ user.phone }}</span>
             </div>
 
             <div class="button_union">
@@ -46,7 +62,7 @@
               <span>密码强度：低</span>
             </div>
             <div class="button_union">
-              <el-button round  @click="modify_password">修改密码</el-button>
+              <el-button round @click="modify_password">修改密码</el-button>
             </div>
           </li>
 
@@ -56,7 +72,7 @@
             </div>
 
             <div class="user_check_message_email">
-              <span>邮箱：1232323232@qq.com</span>
+              <span>邮箱：{{ user.email }}</span>
             </div>
             <div class="button_union">
               <el-button round @click="modify_email">修改邮箱</el-button>
@@ -81,55 +97,107 @@
 
     <div class="up_img">
       <h2>更换头像</h2>
+
       <el-upload
         class="upload-demo"
         drag
-        action="https://jsonplaceholder.typicode.com/posts/"
-        multiple
+        action="http://localhost:8008/files/upload"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload"
       >
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         <div class="el-upload__tip" slot="tip">
-          只能上传jpg/png文件，且不超过500kb
+          只能上传jpg/png文件，且不超过2MB
         </div>
       </el-upload>
+
+      <!-- <el-upload
+        class="avatar-uploader"
+        action="http://localhost:8008/files/upload"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload"
+      >
+        <img v-if="row.avatarUrl" :src="row.avatarUrl" class="avatar" />
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload> -->
     </div>
-
-    <popup :showpo=showpo ref='popup'  @close='clo'></popup>
-    
-
+    <popup :showpo="showpo" ref="popup" @close="clo" :user="user"></popup>
   </div>
 </template>
 
 <script>
-import popup from '../components/popup.vue'
+import popup from "../components/popup.vue";
+
 export default {
   name: "user_myInfo",
-  components:{
-      popup
+  components: {
+    popup,
   },
   data() {
     return {
-      showpo:false,
-      
+      showpo: false,
+      user: {},
     };
   },
   methods: {
-    modify_phone(){
-      this.showpo=true,
-      this.$refs.popup.get_show('p',true)
+    modify_phone() {
+      (this.showpo = true), this.$refs.popup.get_show("p", true);
     },
-    modify_email(){
-      this.showpo=true,
-      this.$refs.popup.get_show('e',true)
+    modify_email() {
+      (this.showpo = true), this.$refs.popup.get_show("e", true);
     },
-    modify_password(){
-      this.showpo=true,
-      this.$refs.popup.get_show('w',true)
+    modify_password() {
+      (this.showpo = true), this.$refs.popup.get_show("w", true);
     },
-    clo(){
-      this.showpo=false
-    }
+    clo() {
+      this.showpo = false;
+    },
+    init() {
+      if (this.$store.state.user.level == 2) {
+        this.request
+          .get(
+            "/anchor/getAnchorByName?username=" +
+              this.$store.state.user.username
+          )
+          .then((res) => {
+            if (res.code === "200") {
+              this.user = res.data;
+            } else this.$message.error(res.msg);
+          })
+          .catch();
+      } else {
+        this.user = this.$store.state.user;
+      }
+    },
+    beforeAvatarUpload(file) {
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isLt2M;
+    },
+    handleAvatarSuccess(res, file) {
+      this.user.avatarUrl = file.response.data;
+      this.request
+        .post("/anchor/modifyAnchor", this.user)
+        .then((res) => {
+          if (res.code === "200") {
+            this.$notify({
+              message: res.data,
+              type: "success",
+              offset: 50,
+              duration: 1200,
+            });
+          } else this.$message.error(res.msg);
+        })
+        .catch();
+    },
+  },
+  mounted() {
+    this.init();
   },
 };
 </script>
@@ -157,8 +225,10 @@ export default {
 
 .user_myInfo_outside {
   /* margin-left: 20px; */
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
+  height: 742px;
+  width: 645px;
 }
 
 .togglebtn_clearfix {
@@ -273,5 +343,41 @@ span {
   width: 400px;
   height: 300px;
   background-color: #ebebeb;
+}
+
+.user_name_span {
+  color: orange;
+}
+.user_email_span {
+  color: orange;
+}
+
+.user_wealthy_span {
+  color: orange;
+}
+
+.user_phone_span {
+  color: orange;
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
 }
 </style>

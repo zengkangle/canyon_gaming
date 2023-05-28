@@ -26,6 +26,7 @@ import enroll from "../components/enroll"
 
 //鱼吧路由
 import Fish from "../pages/Fish"
+import Notice from "../components/Notice"
 
 //用户中心
 import user_self from "../components/User_Self"
@@ -33,6 +34,9 @@ import user_self from "../components/User_Self"
 import user_myInfo from "../components/user_myInfo"
 import user_wallet from "../components/user_wallet"
 import user_concern from "../components/user_concern"
+//主播特有的子模块
+import living_data from "../components/living_data"
+import anchor_table from "../components/anchor_table"
 
 
 
@@ -75,6 +79,12 @@ const router = new VueRouter({
                         },
                     ]
                 },
+                //公告
+                {
+                    path:'Notice',
+                    component:Notice,
+                    meta:{title:'排版公告'}
+                },
                 {
                     path: 'live',
                     component: Live,
@@ -85,6 +95,9 @@ const router = new VueRouter({
                     component: Fish,
                     meta: {title: 'Canyon游戏直播'},
                 },
+
+                
+
                 {
                     path: 'apply_streamer',
                     component: ApplyStreamer,
@@ -115,6 +128,16 @@ const router = new VueRouter({
                             component: user_concern,
                             meta: {title: '用户关注中心'}
                         },
+                        {
+                            path:"living_data",
+                            component:living_data,
+                            meta:{title:'直播数据显示'}
+                        },
+                        {
+                            path:"time_data",
+                            component:anchor_table,
+                            meta:{title:'排班展示'}
+                        }
                     ]
                 },
                 {
@@ -163,7 +186,7 @@ const router = new VueRouter({
             children: [
                 //登录界面路由
                 {
-                    path: '/',
+                    path: 'login',
                     component: login,
                 },
                 //注册路由

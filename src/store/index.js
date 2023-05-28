@@ -20,6 +20,7 @@ const mutations = {
     GETUserFromSession(state, value) {
         if (JSON.parse(sessionStorage.getItem('user'))) {
             state.user = JSON.parse(sessionStorage.getItem('user'))
+            
             if (state.user.uid){
                 state.user.level=2;
             }
@@ -43,6 +44,7 @@ const state = {
         level:'',
         virtualCurrency: '',
         token:'',
+        
     }
 }
 

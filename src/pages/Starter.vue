@@ -1,6 +1,6 @@
 <template>
   <div class="login_background">
-    <div><img height="70px" src="../assets/logo.png" @click="goHome"></div>
+    <div><img height="70px" src="../assets/logo.png" @click="goHome" /></div>
 
     <div class="all_outside">
       <div class="title-header">
@@ -11,13 +11,13 @@
           <router-link
             v-bind:to="'/Canyon_Gaming_Starter/' + type"
             @click.native="go"
-            >{{ tip2 }}</router-link>
+            >{{ tip2 }}</router-link
+          >
           <p class="tip2" click="gotoenroll"></p>
         </div>
       </div>
       <router-view></router-view>
     </div>
-
 
     <div class="bottom">Copyright @ 2021-2022 Tencent. All Rights Reserved</div>
   </div>
@@ -40,18 +40,20 @@ export default {
   methods: {
     go() {
       if (this.a) {
-        (this.type = ""), (this.tip1 = "已有账号"), (this.tip2 = "去登录");
+        (this.type = "login"), 
+        (this.tip1 = "已有账号"), 
+        (this.tip2 = "去登录")
         this.a = false;
       } else {
         (this.type = "enroll"),
-          (this.tip1 = "没有账号？"),
-          (this.tip2 = "去注册");
+        (this.tip1 = "没有账号？"),
+        (this.tip2 = "去注册");
         this.a = true;
       }
     },
-    goHome(){
-      this.$router.push("/")
-    }
+    goHome() {
+      this.$router.push("/");
+    },
   },
 };
 </script>
@@ -69,7 +71,7 @@ export default {
   background-image: url(../assets/login.jpg);
 }
 
-.all_outside{
+.all_outside {
   margin-top: 300px;
   width: 338px;
   margin-left: 40px;
@@ -110,10 +112,10 @@ h1 {
   color: black;
 }
 
-.bottom{
-  position:absolute;
-  bottom:80px;
+.bottom {
+  position: absolute;
+  bottom: 80px;
   color: #c3a340;
-  left:40px;
+  left: 40px;
 }
 </style>

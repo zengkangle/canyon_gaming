@@ -1,5 +1,5 @@
 <template>
-    <div class="login_outside">
+    <div class="enroll_outside">
         <el-form
                 :model="registerUser"
                 status-icon
@@ -104,7 +104,7 @@ export default {
 </script>
 
 <style scoped>
-.login_outside {
+.enroll_outside {
     height: 309px;
     width: 303px;
 }

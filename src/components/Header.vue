@@ -7,8 +7,8 @@
                 >首页
                 </router-link
                 >
-                <router-link to="/11" active-class="menu_active">视频</router-link>
-                <router-link to="/22" active-class="menu_active">赛事</router-link>
+                <router-link to="/base/Notice" active-class="menu_active">公告</router-link>
+                
                 <router-link to="/base/fish" active-class="menu_active"
                 >鱼吧
                 </router-link
@@ -29,7 +29,7 @@
                             size="mini"
                     ></el-button>
                 </div>
-                <router-link class="right_item" to="/11" active-class="right-menu-active">
+                <router-link class="right_item" to="/base/user_self/user_concern" active-class="right-menu-active">
                     <i class="iconfont">&#xe755;</i>
                     <div>关注</div>
                 </router-link>
@@ -86,7 +86,6 @@
 
 <script>
 import {mapState} from 'vuex'
-
 export default {
     name: "Header",
     data() {
@@ -99,7 +98,7 @@ export default {
     },
     methods: {
         toPerson() {
-            this.$router.push("/base/admin/manageUser");
+            this.$router.push("/base/user_self");
         },
         toControl() {
             this.$router.push("/base/admin/manageUser");

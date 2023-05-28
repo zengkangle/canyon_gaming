@@ -1,4 +1,5 @@
 <template>
+
     <div class="login_outside">
         <div class="login_form">
             <h2>账号：</h2>
@@ -31,6 +32,11 @@
 </template>
 
 <script>
+
+
+
+import axios from 'axios';
+import { Result } from 'element-ui';
 export default {
     name: "login",
     data() {
@@ -44,7 +50,6 @@ export default {
     },
     methods: {
         login() {
-            console.log("1")
             if (this.user.username ==="" || this.user.password ==="") {
                 this.$message({
                     showClose: true,
@@ -64,6 +69,8 @@ export default {
                                 offset: 50,
                                 duration:1200,
                             });
+                            console.log('用户登录')
+                            console.log(res.data)
                             sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
                             this.$store.dispatch("getUserFromSession")
                             this.$router.push("/")
@@ -82,6 +89,9 @@ export default {
                                 offset: 50,
                                 duration:1200,
                             });
+                            
+                           console.log('主播登录')
+                            console.log(res.data)
                             sessionStorage.setItem("user", JSON.stringify(res.data))//存储用户信息到浏览器
                             this.$store.dispatch("getUserFromSession")
                             this.$router.push("/")
@@ -151,8 +161,17 @@ h2 {
 .Name_input {
     width: 70%;
 }
+
+
+
+.test{
+    width: 100px;
+    height: 100px;
+    background-color: brown;
+}
 .radio{
     margin-top: 10px;
     margin-bottom: 20px;
+
 }
 </style>

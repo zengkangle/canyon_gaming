@@ -15,6 +15,8 @@ import request from './utils/request'
 //按需引入ElementUI主题
 import './theme/index.css'
 
+
+
 //按需引入ElementUI组件
 import {
     Carousel,
@@ -42,6 +44,8 @@ import {
     Notification,
     Radio,
     InputNumber,
+    DatePicker,
+    
 } from 'element-ui'
 
 //应用插件
@@ -78,6 +82,7 @@ Vue.component('el-select', Select);
 Vue.component('el-link', Link);
 Vue.component('el-radio', Radio);
 Vue.component('el-input-number', InputNumber);
+Vue.component('el-date-picker', DatePicker);
 
 
 Vue.prototype.$confirm = MessageBox.confirm;
