@@ -20,7 +20,11 @@
 <script>
 export default {
   name: "ApplyStreamer",
-  data() {},
+  data() {
+    return{
+
+    }
+  },
   methods: {
     Apply() {
       if (this.$store.state.user.username == "") {
