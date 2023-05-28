@@ -70,9 +70,20 @@ export default {
           .catch();
       } else {
         this.user = this.$store.state.user;
+        this.user.virtualUrrency = this.$store.state.user.virtualCurrency;
+        this.money = parseInt(this.user.virtualUrrency) * 2;
       }
     },
     cash() {
+      if (this.$store.state.user.level != 2) {
+        this.$notify({
+          message: "请成为主播后提现",
+          type: "warning",
+          offset: 50,
+          duration: 1200,
+        });
+        return;
+      }
       this.caches.Aid = parseInt(this.user.id);
       this.caches.cash = this.money;
       this.request
