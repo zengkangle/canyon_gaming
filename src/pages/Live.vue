@@ -37,7 +37,7 @@
             </div>
             <div class="right">
                 <div class="guanzhu">
-                    <template v-if="liveRoomMsg.isgz">
+                    <template v-if="!liveRoomMsg.isgz">
                         <div class="guanzhu-num">{{ liveRoomMsg.fans }}</div>
                         <div class="guanzhu-title" @click="guanzhu">
                             <i class="iconfont aixin">&#xff24;</i>
@@ -53,7 +53,7 @@
                                     <i class="el-icon-arrow-down el-icon--right"></i>
                                 </span>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item @click="quguan">取消关注</el-dropdown-item>
+                                    <el-dropdown-item @click.native="quguan">取消关注</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </div>
@@ -88,6 +88,7 @@
 <script>
 import flvjs from "flv.js";
 import {mapState} from 'vuex';
+
 export default {
     data() {
         return {
@@ -100,23 +101,46 @@ export default {
     },
     methods: {
         init() {
-            this.request.get(
-                "/liveroom/touch",
-                {
-                    params: {
-                        roomId: this.$route.query.roomId,
-                        uid: this.user.uid,
+            if (this.user.uid){
+                this.request.get(
+                    "/liveroom/touch",
+                    {
+                        params: {
+                            roomId: this.$route.query.roomId,
+                            uid: this.user.uid,
+                        }
                     }
-                }
-            ).then(res => {
-                console.log(res);
-                this.liveRoomMsg = res.data;
-                if (this.liveRoomMsg.degreeofeat !== 0) {
-                    this.$nextTick(() => {
-                        this.createVideo();
-                    });
-                }
-            }).catch();
+                ).then(res => {
+                    console.log(res);
+                    console.log(this.user)
+                    this.liveRoomMsg = res.data;
+                    if (this.liveRoomMsg.degreeofeat !== 0) {
+                        this.$nextTick(() => {
+                            this.createVideo();
+                        });
+                    }
+                }).catch();
+            }else{
+                this.request.get(
+                    "/liveroom/touch",
+                    {
+                        params: {
+                            roomId: this.$route.query.roomId,
+                            uid: this.user.id,
+                        }
+                    }
+                ).then(res => {
+                    console.log(res);
+                    console.log(this.user)
+                    this.liveRoomMsg = res.data;
+                    if (this.liveRoomMsg.degreeofeat !== 0) {
+                        this.$nextTick(() => {
+                            this.createVideo();
+                        });
+                    }
+                }).catch();
+            }
+
         },
         createVideo() {
             if (flvjs.isSupported()) {
@@ -131,44 +155,64 @@ export default {
                 this.flvPlayer.play();
             }
         },
-        guanzhu(){
-            this.request.get(
-                "/follow/followAnchor",
-                {
-                    params: {
-                        uid: this.user.uid,
-                        aid: this.liveRoomMsg.aid,
+        guanzhu() {
+            if (this.user.uid) {
+                this.request.get(
+                    "/follow/followAnchor",
+                    {
+                        params: {
+                            uid: this.user.uid,
+                            aid: this.liveRoomMsg.aid,
+                        }
                     }
-                }
-            ).then(res => {
-                console.log(res);
-                this.init();
-                this.$notify({
-                    message: res.msg,
-                    type: 'success',
-                    offset: 50,
-                    duration:1200,
-                });
-            }).catch();
+                ).then(res => {
+                    console.log(res);
+                    this.init();
+                }).catch();
+            } else {
+                this.request.get(
+                    "/follow/followAnchor",
+                    {
+                        params: {
+                            uid: this.user.id,
+                            aid: this.liveRoomMsg.aid,
+                        }
+                    }
+                ).then(res => {
+                    console.log(res);
+                    this.init();
+                }).catch();
+            }
         },
-        quguan(){
-            this.request.get(
-                "/follow/cancelFollowAnchor",
-                {
-                    params: {
-                        uid: this.user.uid,
-                        aid: this.liveRoomMsg.aid,
+        quguan() {
+            if (this.user.uid){
+                this.request.get(
+                    "/follow/cancelFollowAnchor",
+                    {
+                        params: {
+                            uid: this.user.uid,
+                            aid: this.liveRoomMsg.aid,
+                        }
                     }
-                }
-            ).then(res => {
-                console.log(res);
-                this.$notify({
-                    message: res.msg,
-                    type: 'success',
-                    offset: 50,
-                    duration:1200,
-                });
-            }).catch();
+                ).then(res => {
+                    console.log(res);
+                    this.init();
+                }).catch();
+
+            }else{
+                this.request.get(
+                    "/follow/cancelFollowAnchor",
+                    {
+                        params: {
+                            uid: this.user.id,
+                            aid: this.liveRoomMsg.aid,
+                        }
+                    }
+                ).then(res => {
+                    console.log(res);
+                    this.init();
+                }).catch();
+            }
         }
     },
     filters: {
