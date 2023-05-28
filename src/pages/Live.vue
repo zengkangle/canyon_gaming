@@ -10,7 +10,7 @@
             </div>
             <div class="middle">
                 <div class="middle_header">
-                    <div class="middle_header_title">{{ liveRoomMsg.roomname | roomname(liveRoomMsg.username)}}</div>
+                    <div class="middle_header_title">{{ liveRoomMsg.roomname | roomname(liveRoomMsg.username,liveRoomMsg.degreeofeat)}}</div>
                     <div class="subtitle jubao">举报</div>
                     <div class="subtitle">网络竞技</div>
                     <i class="el-icon-caret-right subtitle"></i>
@@ -111,9 +111,8 @@ export default {
         },
     },
     filters: {
-        roomname(value,username) {
-            if (value === null) {
-                console.log(this);
+        roomname(value,username,degreeofeat) {
+            if (value === null||degreeofeat===0) {
                 return '主播' + username + ':正在赶来的路上！';
             }else {
                 return value;

@@ -111,7 +111,7 @@ export default {
                 "/liveroom/open",
                 {
                     params: {
-                        id: this.user.id,
+                        id: this.user.uid,
                         roomname: this.liveMsg.title,
                         theme: this.liveMsg.theme,
                         imgurl: this.liveMsg.roomImage,
@@ -135,7 +135,7 @@ export default {
                 "/liveroom/over",
                 {
                     params: {
-                        id: this.user.id,
+                        id: this.user.uid,
                     }
                 }
             ).then(res => {
@@ -155,7 +155,7 @@ export default {
                 "/liveroom/getOld",
                 {
                     params: {
-                        id: this.user.id
+                        id: this.user.uid
                     }
                 }
             ).then(res => {

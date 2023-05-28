@@ -80,8 +80,8 @@
                 <el-form-item label="邮箱">
                     <el-input v-model="row.email"></el-input>
                 </el-form-item>
-                <el-form-item label="用户等级">
-                    <el-select v-model="row.level" filterable placeholder="请选择">
+                <el-form-item label="用户等级" >
+                    <el-select v-model="row.level" filterable placeholder="请选择" disabled="true">
                         <el-option
                                 v-for="item in options"
                                 :key="item.value"
