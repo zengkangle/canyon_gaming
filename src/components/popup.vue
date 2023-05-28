@@ -193,7 +193,7 @@ export default {
 </script>
 
 <style scoped>
-/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+
 @font-face {
   font-family: "iconfont"; /* Project id 3979529 */
   src: url("//at.alicdn.com/t/c/font_3979529_l0wmpkfsx6.woff2?t=1683955896353")

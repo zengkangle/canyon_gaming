@@ -60,7 +60,6 @@ export default {
         .then((res) => {
           if (res.code === "200") {
             
-            console.log(res.data);
           } else this.$message.error(res.msg);
         })
         .catch();
