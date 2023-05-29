@@ -9,7 +9,7 @@
         />
       </div>
       <div class="apply_button">
-        <el-button type="success" plain class="go_apply" @click="Apply"
+        <el-button type="primary" plain class="go_apply" @click="Apply"
           >申请成为主播</el-button
         >
       </div>
@@ -20,7 +20,11 @@
 <script>
 export default {
   name: "ApplyStreamer",
-  data() {},
+  data() {
+      return{
+
+      }
+  },
   methods: {
     Apply() {
       if (this.$store.state.user.username == "") {
@@ -43,7 +47,7 @@ export default {
               });
             } else {
               this.$notify({
-                message: "已是主播",
+                message: "正在申请中",
                 type: "warning",
                 offset: 50,
                 duration: 1200,

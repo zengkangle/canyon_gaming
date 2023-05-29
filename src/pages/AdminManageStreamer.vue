@@ -200,6 +200,7 @@ export default {
               message: "已同意该用户成为主播",
               type: "success",
             });
+              this.init()
           } else this.$message.error(res.msg);
         })
         .catch();
@@ -215,6 +216,7 @@ export default {
               message: "已拒绝该用户成为主播",
               type: "success",
             });
+            this.init()
           } else this.$message.error(res.msg);
         })
         .catch();
@@ -229,7 +231,6 @@ export default {
           } else this.$message.error(res.msg);
         })
         .catch();
-
       this.request
         .get("/anchor/showAllAnchor", {
           params: this.pageMsg,

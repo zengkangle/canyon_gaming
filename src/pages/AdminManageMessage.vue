@@ -44,7 +44,6 @@ export default {
     send_time() {
       const momentObj = moment(this.value1[0], "YYYY-MM-DD HH:mm:ss");
       const momentObj1 = moment(this.value1[1], "YYYY-MM-DD HH:mm:ss");
-      console.log(momentObj);
       this.request
         .get("/worktime/add", {
           params: {
@@ -55,6 +54,12 @@ export default {
         .then((res) => {
           if (res.code === "200") {
             this.user = res.data;
+              this.$notify({
+                  message: '发布时间成功',
+                  type: 'success',
+                  offset: 50,
+                  duration: 1200,
+              });
           } else this.$message.error(res.msg);
         })
         .catch();

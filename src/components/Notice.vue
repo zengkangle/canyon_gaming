@@ -33,6 +33,10 @@ export default {
   data() {
     return {
       showTime: [],
+        applyer: {
+            tid:1,
+            uid: 1,
+        },
     };
   },
   methods: {
@@ -47,7 +51,36 @@ export default {
         .catch();
     },
     handleEdit(index,row){
-      
+        if (this.$store.state.user.level !=2){
+            this.$notify({
+                message: '您还不是主播',
+                type: 'warning',
+                offset: 50,
+                duration: 1200,
+            });
+            return
+        }
+        this.applyer.tid = parseInt(row.id)
+        this.applyer.uid=parseInt(this.$store.state.user.id)
+        this.request
+            .get("/worktime/apply",
+                {
+                    params: this.applyer
+                }
+            )
+            .then((res) => {
+                if (res.code === "200") {
+                    this.$notify({
+                        message: '请等待审核',
+                        type: 'success',
+                        offset: 50,
+                        duration: 1200,
+                    });
+                    this.init()
+                } else this.$message.error(res.msg);
+            })
+            .catch();
+        this.init()
     }
   },
   mounted() {

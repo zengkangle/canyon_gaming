@@ -71,11 +71,12 @@ export default {
   },
   methods: {
     init() {
-      this.pageMsg.uid = parseInt(this.$store.state.user.id);
+      this.pageMsg.uid = parseInt(this.$store.state.user.uid);
       this.request
         .get("/follow/showAllFollowAnchor", { params: this.pageMsg })
         .then((res) => {
           if (res.code === "200") {
+
             this.follows = res.data.records;
             this.pageMsg.total = res.data.total;
             this.change();

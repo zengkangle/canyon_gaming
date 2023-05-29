@@ -143,7 +143,7 @@ export default {
     width: 100vw;
     position: fixed;
     background-color: #080411;
-    z-index: 10;
+    z-index: 999;
 }
 
 .header {

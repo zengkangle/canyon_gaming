@@ -26,7 +26,7 @@ export default {
     data() {
         return {
             pageMsg: {
-                pageSize: 10,
+                pageSize: 12,
                 currentPage: 1,
                 total: 0,
                 theme: ''
