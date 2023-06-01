@@ -123,7 +123,6 @@ export default {
   },
   methods: {
     handleEdit(index, row) {
-      console.log(row);
       this.dialogVisible = true;
       this.row.avatarUrl = row.avatarUrl;
       this.row.username = row.username;
@@ -136,7 +135,6 @@ export default {
       this.row = row;
     },
     handleDelete(index, row) {
-      console.log(index, row);
       this.$confirm("此操作将永久删除该主播, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -200,6 +198,7 @@ export default {
               message: "已同意该用户成为主播",
               type: "success",
             });
+            this.init()
           } else this.$message.error(res.msg);
         })
         .catch();
@@ -215,6 +214,7 @@ export default {
               message: "已拒绝该用户成为主播",
               type: "success",
             });
+            this.init()
           } else this.$message.error(res.msg);
         })
         .catch();
@@ -225,11 +225,9 @@ export default {
         .then((res) => {
           if (res.code === "200") {
             this.user_applys = res.data;
-            console.log(this.user_applys);
           } else this.$message.error(res.msg);
         })
         .catch();
-
       this.request
         .get("/anchor/showAllAnchor", {
           params: this.pageMsg,
@@ -255,7 +253,6 @@ export default {
     },
 
     update(row) {
-      console.log(row);
       this.request
         .post("/anchor/modifyAnchor", this.row)
         .then((res) => {

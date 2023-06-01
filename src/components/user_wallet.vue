@@ -86,20 +86,29 @@ export default {
       }
       this.caches.Aid = parseInt(this.user.id);
       this.caches.cash = this.money;
-      this.request
-        .get("/anchor/cash", { params: this.caches })
-        .then((res) => {
-          if (res.code === "200") {
-            this.$notify({
-              message: "提现成功",
-              type: "success",
-              offset: 50,
-              duration: 1200,
-            });
-            this.init();
-          } else this.$message.error(res.msg);
-        })
-        .catch();
+      if (this.money > 0) {
+        this.request
+          .get("/anchor/cash", { params: this.caches })
+          .then((res) => {
+            if (res.code === "200") {
+              this.$notify({
+                message: "提现成功",
+                type: "success",
+                offset: 50,
+                duration: 1200,
+              });
+              this.init();
+            } else this.$message.error(res.msg);
+          })
+          .catch();
+      } else {
+        this.$notify({
+          message: "余额不足",
+          type: "warning",
+          offset: 50,
+          duration: 1200,
+        });
+      }
     },
   },
   mounted() {
