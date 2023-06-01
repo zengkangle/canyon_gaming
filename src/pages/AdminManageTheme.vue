@@ -66,7 +66,7 @@ export default {
                             offset: 50,
                             duration: 1200,
                         });
-                        console.log()
+                        
                         this.init();
                     } else this.$message.error(res.msg);
                 })
