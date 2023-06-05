@@ -146,7 +146,6 @@ export default {
                     params: this.pageMsg
                 }
             ).then(res => {
-                console.log(res.data);
                 this.userMsg = res.data.records;
                 this.pageMsg.total = res.data.total;
             }).catch();
@@ -160,7 +159,6 @@ export default {
             this.change();
         },
         handleEdit(index, row) {
-            console.log(row);
             this.dialogVisible = true;
             this.row.avatarUrl = row.avatarUrl;
             this.row.username = row.username;

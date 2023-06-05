@@ -71,15 +71,23 @@ export default {
   },
   methods: {
     init() {
-      this.pageMsg.uid = parseInt(this.$store.state.user.uid);
+      this.pageMsg.uid = parseInt(this.$store.state.user.id);
       this.request
         .get("/follow/showAllFollowAnchor", { params: this.pageMsg })
         .then((res) => {
-          if (res.code === "200") {
-
-            this.follows = res.data.records;
-            this.pageMsg.total = res.data.total;
-            this.change();
+          if (res.code == "200") {
+            if (!!res.data) {
+              this.follows = res.data.records;
+              this.pageMsg.total = res.data.total;
+              this.change();
+            } else {
+              this.$notify({
+                message: "快去关注心仪的主播吧！",
+                type: "success",
+                offset: 50,
+                duration: 1200,
+              });
+            }
           } else this.$message.error(res.msg);
         })
         .catch();
@@ -102,7 +110,6 @@ export default {
       this.change();
     },
     handleDelete(index, row) {
-      console.log(row);
       this.deleteParams.uid = parseInt(this.$store.state.user.id);
       this.deleteParams.aid = parseInt(row.id);
       this.request

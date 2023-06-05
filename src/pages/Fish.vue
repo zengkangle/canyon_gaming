@@ -12,7 +12,6 @@
             v-model="textarea"
           >
           </el-input>
-
           <div class="main-content-editorWrap-commit">
             <div class="incon-font-set">
               <div class="common-editorWidgetWrapper">
@@ -107,12 +106,9 @@
         </div>
 
         <el-dialog
-          @open="opendialog()"
-          @close="closedialog()"
           title="评论"
           :visible.sync="dialogVisible"
           width="28%"
-          :before-close="handleClose"
           class="dialog_main_body"
         >
           <div class="common-editorTextWrapper">
@@ -176,7 +172,7 @@
                 <span>关注</span>
               </li>
               <li>
-                <strong>{{fans}}</strong>
+                <strong>{{ fans }}</strong>
                 <span>粉丝</span>
               </li>
               <li>
@@ -251,8 +247,8 @@ export default {
         avatarUrl: "",
         username: "",
       },
-      fans:0,
-      anchorList:[]
+      fans: 0,
+      anchorList: [],
     };
   },
   methods: {
@@ -261,7 +257,6 @@ export default {
         typeof item.childrenMsgList === "object" &&
         item.childrenMsgList !== null
       ) {
-        console.log(index);
         this.childrenMsgList = item.childrenMsgList;
       } else {
         this.childrenMsgList = [];
@@ -283,18 +278,14 @@ export default {
         })
         .catch();
 
-
-
-
       this.request
         .get("/anchor/getsix")
         .then((res) => {
           if (res.code === "200") {
             this.anchorList = res.data;
-            console.log(this.anchorList)
           } else this.$message.error(res.msg);
         })
-        .catch();  
+        .catch();
     },
     release() {
       if (this.textarea == "") {
@@ -312,17 +303,15 @@ export default {
         .post("/msg/saveComment", this.article)
         .then((res) => {
           if (res.code === "200") {
-            console.log("发布帖子" + res.data);
-            this.article.comment = "";
+            this.$notify({
+              message: "发布成功",
+              type: "success",
+              offset: 50,
+              duration: 1200,
+            });
           } else this.$message.error(res.msg);
         })
         .catch();
-    },
-    opendialog() {
-      // console.log(this.childrenMsgList);
-    },
-    closedialog() {
-      console.log("关闭回调");
     },
     release_comment() {
       if (this.textarea_comment == "") {
@@ -339,6 +328,15 @@ export default {
         .then((res) => {
           if (res.code === "200") {
             this.textarea_comment = "";
+            this.$notify({
+              message: "发布成功",
+              type: "success",
+              offset: 50,
+              duration: 1200,
+            });
+            console.log(this.childrenMsgList);
+            this.childrenMsgList.push(this.dialog_comment);
+            this.init();
           } else this.$message.error(res.msg);
         })
         .catch();
@@ -351,11 +349,10 @@ export default {
         )
         .then((res) => {
           if (res.code === "200") {
-            this.fans =  res.data.fans
+            this.fans = res.data.fans;
           } else this.$message.error(res.msg);
         })
         .catch();
-
     },
   },
   mounted() {
@@ -421,7 +418,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.2);
 
   width: 800px;
-  height: 800px;
+  /* height: 800px; */
   margin-left: 10px;
   padding-left: 10px;
   padding-right: 10px;

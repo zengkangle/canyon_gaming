@@ -2,29 +2,29 @@
   <div>
     <div class="title">消息管理</div>
     <div class="divide"></div>
-      <div class="time_detail">
-        <h2 class="send_h2">发布排班</h2>
-        <div class="block">
-          <span class="demonstration"></span>
-          <el-date-picker
-            v-model="value1"
-            type="datetimerange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            size="large"
+    <div class="time_detail">
+      <h2 class="send_h2">发布排班</h2>
+      <div class="block">
+        <span class="demonstration"></span>
+        <el-date-picker
+          v-model="value1"
+          type="datetimerange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          size="large"
+        >
+        </el-date-picker>
+        <div class="time_send">
+          <el-button type="primary" plain class="send_time" @click="send_time"
+            >提交</el-button
           >
-          </el-date-picker>
-          <div class="time_send">
-            <el-button type="primary" plain class="send_time" @click="send_time"
-              >提交</el-button
-            >
-          </div>
         </div>
       </div>
-
-      <div class="notice_detail"> </div>
     </div>
+
+    <div class="notice_detail"></div>
+  </div>
 </template>
 
 <script>
@@ -44,6 +44,7 @@ export default {
     send_time() {
       const momentObj = moment(this.value1[0], "YYYY-MM-DD HH:mm:ss");
       const momentObj1 = moment(this.value1[1], "YYYY-MM-DD HH:mm:ss");
+      console.log(momentObj);
       this.request
         .get("/worktime/add", {
           params: {
@@ -74,14 +75,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .title {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .divide {
-    width: 100%;
-    height: 1px;
-    background-color: #d8dee4;
-    margin: 16px 0 18px 0;
+  width: 100%;
+  height: 1px;
+  background-color: #d8dee4;
+  margin: 16px 0 18px 0;
 }
 
 .time_detail {
